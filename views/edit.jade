@@ -1,0 +1,16 @@
+extends menu
+block content
+  h1= title
+  form(action='',method='post')
+    div
+      label(for='name') Name:
+      input(type='text', name='name', id='name', placeholder='Name here...', value=person.name)
+    div
+      label(for='age') Age:
+      input(type='text', name='age', id='age', placeholder='Age...', value=person.age)
+    div
+      input(type='submit', value='Save')
+  p.bg-info=JSON.stringify(person)
+  style.
+    form label { min-width: 80px; display: inline-block; }
+    form > div { padding: 5px; }

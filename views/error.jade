@@ -1,0 +1,10 @@
+extends menu
+block content
+  h1= "Algo salio mal :("
+  -if(error.status!=404){
+  h2= message
+  h3= error.status
+  pre #{error.stack}
+  -}else{
+  h3 Paguina no encontrada
+  -};

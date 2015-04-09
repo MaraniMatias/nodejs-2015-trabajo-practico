@@ -1,0 +1,27 @@
+extends menu
+block content
+  h1= title
+  //p=JSON.stringify(persons)
+  -var msj =JSON.stringify(flashmsg);
+  -if(msj!='[]'){
+  p.text-info  #{msj}.
+  -};
+  //a(href="/new") New
+  .table-responsive
+    table.table.table-bordered
+      tr
+        th #
+        th Name
+        th Age
+        th Options
+      - persons.forEach(function(v,i){
+      tr
+        td=i
+        td=v.name
+        td #{v.age} years
+        td
+          a(href="/edit/"+v._id) Edit
+          | 
+          a(href="/delete/"+v._id) Delete
+      - });
+      

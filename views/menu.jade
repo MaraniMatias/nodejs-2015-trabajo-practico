@@ -1,0 +1,44 @@
+extends layout
+block menuContenido
+  // -var menu = [["List","/list"],["New","/new"]];
+  nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+        a.navbar-brand(href='/') My first project
+      #navbar.navbar-collapse.collapse
+        ul.nav.navbar-nav
+          - for(key in menu){
+          //- if(key==0){ 
+          //li.active
+          //  a(href='#{menu[key][1]}') #{menu[key][0]}
+          //-}else{
+          li
+            a(href='#{menu[key][1]}') #{menu[key][0]}
+          //-}
+          -};
+        //  
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+              | Dropdown 
+              span.caret
+            ul.dropdown-menu(role='menu')
+              li
+                a(href='#') Action
+              li
+                a(href='#') Another action
+              li
+                a(href='#') Something else here
+              li.divider
+              li.dropdown-header Nav header
+              li
+                a(href='#') Separated link
+              li
+                a(href='#') One more separated link
+        
+        ul.nav.navbar-nav.navbar-right
+          .navbar-form.navbar-right
+            li
+              a.btn.btn-success(href='/signin', role='button') Sign in
+  .container
+    block content
