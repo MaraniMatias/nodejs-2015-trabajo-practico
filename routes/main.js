@@ -1,5 +1,24 @@
 var app = module.parent.exports.app;
 var Persons = require('../models/persons.js');
+var Admins = require('../models/admins.js');
+var passport = module.parent.exports.passport;
+
+//LOGIN
+app.get('/login', function(req, res){
+  var msg = req.flash('message');
+  res.render('login', { title: 'Login', flashmsg: msg});
+});
+app.post('/login', passport.authenticate('AdminLogin', 
+    { successRedirect: '/list',
+      failureRedirect: '/login',
+      failureFlash: true })
+);
+/*
+app.post('/login', function(req, res){
+    res.json(req.body);
+});
+*/
+  
 // LISTADO
 app.get('/list', function(req, res){
   var msg = req.flash('message'); // Read the flash message
@@ -63,10 +82,4 @@ app.post('/edit/:id', function(req, res){
             res.end(err);    
         }    
     });
-});
-
-// Login
-app.get('/login', function(req, res){
-  var msg = req.flash('message'); // Read the flash message
-  res.render('login', { title: 'login', flashmsg: msg}); // Pass Flash Message to the view
 });
