@@ -66,7 +66,7 @@ app.post('/edit/:id', function(req, res){
 });
 
 // Login
-app.get('login', function(req, res){
+app.get('/login', function(req, res){
   var msg = req.flash('message'); // Read the flash message
   res.render('login', { title: 'login', flashmsg: msg}); // Pass Flash Message to the view
 });
