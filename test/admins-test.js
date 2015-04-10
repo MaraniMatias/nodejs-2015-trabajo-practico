@@ -1,11 +1,11 @@
-#!/bin/sh
-# name of this script: m4a2mp3.sh
-# m4a to mp3
+var Admin = require('../models/admins');
+var mongoose = require('mongoose');
 
-for i in *.m4a; do
-  faad "$i"
-  x=`echo "$i"|sed -e 's/.m4a/.wav/'`
-  y=`echo "$i"|sed -e 's/.m4a/.mp3/'`
-  lame -h -b 192 "$x" "$y"
-  rm "$x"
-done
+mongoose.connect('mongodb://localhost/crudtest');
+
+var a = new Admin({ email:"admin@admin.com", password: "123456" });
+a.save(function(err, doc){
+    console.log(err, doc);    
+    console.log("PasswordOK", a.authenticate("123456"));
+    console.log("PasswordFAIL", a.authenticate("incorrect"));
+});
