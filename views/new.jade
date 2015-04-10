@@ -2,22 +2,22 @@ extends menu
 block content
   h1= title
   form(action='',method='post')
-    div.form-group
-      label.col-sm-2.control-label(for='name') Name:
-      input.form-control(type='text', name='name', id='name', placeholder='Nombre')
-    div.form-group
-      label.col-sm-2.control-label(for='surname') Surname:
-      input.form-control(type='text', name='surname', id='surname', placeholder='Apellido')
-    div.form-group
-      label.col-sm-2.control-label(for='email') Email:
+    .form-group
+      label(for='name') Name:
+      input(type='text', name='name', id='name', placeholder='Nombre')
+    .form-group
+      label(for='surname') Surname:
+      input(type='text', name='surname', id='surname', placeholder='Apellido')
+    .form-group
+      label(for='email') Email:
       input(type='text', name='email', id='email', placeholder='Email')
-    div.form-group
-      label.col-sm-2.control-label(for='password') Password:
+    .form-group
+      label(for='password') Password:
       input(type='text', name='password', id='password', placeholder='Contraseña')
-     div.form-group
-      label.col-sm-2.control-label(for='password2') Confirmar Password:
+    .form-group
+      label(for='password2') Confirmar Password:
       input(type='text', name='password2', id='password2', placeholder='Confirmar Contraseña')
-    div.form-group
+    .form-group
       input(type='submit', value='Save')
 
 
