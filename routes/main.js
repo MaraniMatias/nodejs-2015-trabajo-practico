@@ -2,6 +2,19 @@ var app = module.parent.exports.app;
 var Persons = require('../models/persons.js');
 var Admins = require('../models/admins.js');
 var passport = module.parent.exports.passport;
+var adminAuth = function(req, res, next){
+    //authorize role
+    if(typeof req.user != "undefined"){
+        next();
+    }else{
+        //Not authorized redirect
+        res.redirect('/');
+    }
+}
+app.use(function(req, res, next) {
+    res.locals.user = req.user;
+    next();
+});
 
 //LOGIN
 app.get('/login', function(req, res){
@@ -24,6 +37,18 @@ app.get('/list', function(req, res){
   var msg = req.flash('message'); // Read the flash message
   Persons.find({}, function(err, docs){
     res.render('list', { title: 'List', persons: docs, flashmsg: msg}); // Pass Flash Message to the view
+  });
+});
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+  
+// SEARCH
+app.get('/search', adminAuth, function(req, res){
+  var msg = req.flash('message');
+  Persons.find({}, function(err, docs){
+    res.render('search', { title: 'Search', flashmsg: msg});
   });
 });
 

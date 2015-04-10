@@ -38,7 +38,14 @@ block menuContenido
         
         ul.nav.navbar-nav.navbar-right
           .navbar-form.navbar-right
+            -if (user) {
+            li Welcome
+              b  #{user.email}
+            li
+              a(href="/logout") Sign-Off
+            -}else{
             li
               a.btn.btn-success(href='/login', role='button') Login
+            -}
   .container
     block content
