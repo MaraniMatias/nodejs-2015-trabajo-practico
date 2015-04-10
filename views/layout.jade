@@ -15,7 +15,7 @@ html(lang='es')
   body
     block menuContenido
     footer.footer
-    - var year = new Date().getFullYear();
-    p © Company #{year}
+    -var year = new Date().getFullYear();
+      p © Company #{year}
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
     script(src='/components/bootstrap/dist/js/bootstrap.js')
