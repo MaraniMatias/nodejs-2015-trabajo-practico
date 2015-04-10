@@ -23,7 +23,7 @@ app.get('/login', function(req, res){
 });
 app.post('/login', passport.authenticate('AdminLogin', 
     { successRedirect: '/list',
-      failureRedirect: '/login',
+      failureRedirect: '/', //failureRedirect: '/login',
       failureFlash: true })
 );
 /*

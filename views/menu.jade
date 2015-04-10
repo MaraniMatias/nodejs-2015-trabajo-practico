@@ -37,15 +37,18 @@ block menuContenido
                 a(href='#') One more separated link
         
         ul.nav.navbar-nav.navbar-right
-          .navbar-form.navbar-right
+          .navbar-form.navbar-right            
             -if (user) {
-            li Welcome
-              b  #{user.email}
             li
-              a(href="/logout") Sign-Off
+              b #{user.email} 
+              a.btn.btn-danger.btn-sm(href="/logout") Sign-Off
             -}else{
-            li
-              a.btn.btn-success(href='/login', role='button') Login
+            form(action='/login',method='post')
+              .form-group
+                input.form-control(for='inputEmail', type='text', name='email', id='inputEmail', required='', placeholder='Email address')
+              .form-group
+                input.form-control(for='inputPassword', type='password', name='password', required='', id='inputPassword', placeholder='Password')
+              button.btn.btn-success(type='submit') Login
             -}
   .container
     block content
