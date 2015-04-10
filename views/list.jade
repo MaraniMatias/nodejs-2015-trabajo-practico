@@ -13,15 +13,19 @@ block content
         th #
         th Name
         th Age
+        -if (user) {
         th Options
+        -}
       - persons.forEach(function(v,i){
       tr
         td=i
         td=v.name
         td #{v.age} years
+        -if (user) {
         td
           a(href="/edit/"+v._id) Edit
           | 
           a(href="/delete/"+v._id) Delete
+        -}
       - });
       

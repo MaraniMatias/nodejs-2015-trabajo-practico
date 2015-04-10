@@ -1,6 +1,9 @@
 extends layout
 block menuContenido
   -var menu = [["List","/list"],["Search","/search"]];
+  -if (user) {
+  -var menu = [["List","/list"],["Search","/search"],["New Employees"," /panel/employees/new"]];
+  -}
   nav.navbar.navbar-default
     .container-fluid
       .navbar-header
@@ -9,13 +12,8 @@ block menuContenido
       #navbar.navbar-collapse.collapse
         ul.nav.navbar-nav
           - for(key in menu){
-          //- if(key==0){ 
-          //li.active
-          //  a(href='#{menu[key][1]}') #{menu[key][0]}
-          //-}else{
           li
             a(href='#{menu[key][1]}') #{menu[key][0]}
-          //-}
           -};
         //  
           li.dropdown
@@ -41,9 +39,9 @@ block menuContenido
             -if (user) {
             li
               b #{user.email} 
-              a.btn.btn-danger.btn-sm(href="/logout") Sign-Off
+              a.btn.btn-danger(href="/logout") Sign-Off
             -}else{
-            form(action='/login',method='post')
+            form(action='/admin',method='post')
               .form-group
                 input.form-control(for='inputEmail', type='text', name='email', id='inputEmail', required='', placeholder='Email address')
               .form-group

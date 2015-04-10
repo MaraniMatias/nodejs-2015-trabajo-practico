@@ -19,8 +19,8 @@ var app = express();
 var mongoose = require('mongoose');
 var fixtures = require('mongoose-fixtures');
 mongoose.connect('mongodb://localhost/crudtest');
-fixtures.load('./fixtures/persons.js');
-fixtures.load('./fixtures/admins.js');
+//fixtures.load('./fixtures/persons.js');
+//fixtures.load('./fixtures/admins.js');
 var app = exports.app = express();
 /////////////////// agregado
 
