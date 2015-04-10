@@ -1,4 +1,4 @@
-var Person = require('../models/persons');
+var Person = require('../models/employees');
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/crudtest');

@@ -12,7 +12,8 @@ block content
       tr
         th #
         th Name
-        th Age
+        th Surname
+        th Email
         -if (user) {
         th Options
         -}
@@ -20,7 +21,8 @@ block content
       tr
         td=i
         td=v.name
-        td #{v.age} years
+        td=v.surname
+        td=v.email
         -if (user) {
         td
           a(href="/edit/"+v._id) Edit

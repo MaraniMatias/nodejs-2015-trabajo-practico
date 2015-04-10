@@ -5,7 +5,7 @@ var employeesSchema = new Schema({
     name: String,
     surname: String,
     email: String,
-    Password: String
+    password: String
 });
 
 var employeesModel = mongoose.model('Employees', employeesSchema);

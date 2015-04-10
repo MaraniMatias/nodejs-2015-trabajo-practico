@@ -1,8 +1,8 @@
 extends layout
 block menuContenido
-  -var menu = [["List","/list"],["Search","/search"]];
+  -var menu = [["List","/panel/employees"],["Search","/search"]];
   -if (user) {
-  -var menu = [["List","/list"],["Search","/search"],["New Employees"," /panel/employees/new"]];
+  -var menu = [["List","/panel/employees"],["Search","/search"],["New Employees"," /panel/employees/new"]];
   -}
   nav.navbar.navbar-default
     .container-fluid

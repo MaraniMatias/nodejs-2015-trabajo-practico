@@ -2,14 +2,23 @@ extends menu
 block content
   h1= title
   form(action='',method='post')
-    div
-      label(for='name') Name:
-      input(type='text', name='name', id='name', placeholder='Name here...')
-    div
-      label(for='age') Age:
-      input(type='text', name='age', id='age', placeholder='Age...')
-    div
+    div.form-group
+      label.col-sm-2.control-label(for='name') Name:
+      input.form-control(type='text', name='name', id='name', placeholder='Nombre')
+    div.form-group
+      label.col-sm-2.control-label(for='surname') Surname:
+      input.form-control(type='text', name='surname', id='surname', placeholder='Apellido')
+    div.form-group
+      label.col-sm-2.control-label(for='email') Email:
+      input(type='text', name='email', id='email', placeholder='Email')
+    div.form-group
+      label.col-sm-2.control-label(for='password') Password:
+      input(type='text', name='password', id='password', placeholder='Contraseña')
+     div.form-group
+      label.col-sm-2.control-label(for='password2') Confirmar Password:
+      input(type='text', name='password2', id='password2', placeholder='Confirmar Contraseña')
+    div.form-group
       input(type='submit', value='Save')
-  style.
-    form label { min-width: 80px; display: inline-block; }
-    form > div { padding: 5px; }
+
+
+    
