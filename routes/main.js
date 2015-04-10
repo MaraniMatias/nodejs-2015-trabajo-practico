@@ -2,6 +2,7 @@ var app = module.parent.exports.app;
 var Employees = require('../models/employees.js');
 var Admins = require('../models/admins.js');
 var passport = module.parent.exports.passport;
+
 var adminAuth = function(req, res, next){
     //authorize role
     if(typeof req.user != "undefined"){
@@ -19,7 +20,7 @@ app.use(function(req, res, next) {
 //LOGIN
 app.get('/admin', function(req, res){
   var msg = req.flash('message');
-  res.render('admin', { title: 'Login', flashmsg: msg});
+  res.render('admin', { title: 'Login', url: '/admin', flashmsg: msg});
 });
 app.post('/admin', passport.authenticate('AdminLogin', 
     { successRedirect: '/panel/employees', // autentificacion ok
@@ -28,7 +29,7 @@ app.post('/admin', passport.authenticate('AdminLogin',
 );
 app.get('/logout', function(req, res){
     req.logout();
-    res.redirect('/');
+    res.redirect('/panel/employees');
 });
 /*
 app.post('/login', function(req, res){
@@ -40,22 +41,22 @@ app.post('/login', function(req, res){
 app.get('/panel/employees', function(req, res){
   var msg = req.flash('message'); // Read the flash message
   Employees.find({}, function(err, docs){
-    res.render('list', { title: 'List', persons: docs, flashmsg: msg}); // Pass Flash Message to the view
+    res.render('list', { title: 'List',  url: '/panel/employees' , persons: docs, flashmsg: msg}); // Pass Flash Message to the view
   });
 });
 
 // SEARCH
-app.get('/search', adminAuth, function(req, res){
+app.get('/search', function(req, res){
   var msg = req.flash('message');
   Employees.find({}, function(err, docs){
-    res.render('search', { title: 'Search', flashmsg: msg});
+    res.render('search', { title: 'Search', url: '/search', flashmsg: msg});
   });
 });
 
 // NUEVO
  app.get('/panel/employees/new', adminAuth, function(req, res){
     req.flash('message', 'Employed successfully added.'); // Save the flash message
-    res.render('new', { title: 'New Employees'});
+    res.render('new', { title: 'New Employees', url: '/panel/employees/new' });
  });
 app.post('/panel/employees/new', adminAuth, function(req, res){
     //console.log(req.body);
@@ -84,14 +85,14 @@ app.get('/delete/:id', adminAuth, function(req, res){
 app.get('/edit/:id',adminAuth, function(req, res){
     Employees.findOne({ _id: req.params.id }, function(err, doc){
         if(!err){
-            res.render('edit', { title: 'Edit', person: doc});
+            res.render('edit', { title: 'Edit', url: '/panel/employees' , person: doc});
         } else {
             res.end(err);    
         }    
     });
 });
 app.post('/edit/:id',adminAuth, function(req, res){
-    Employees.findOne({ _id: req.params.id }, function(err, doc){
+    EmployeesEmployees.findOne({ _id: req.params.id }, function(err, doc){
         if(!err){
             doc.name = req.body.name; 
             doc.surname = req.body.surname;

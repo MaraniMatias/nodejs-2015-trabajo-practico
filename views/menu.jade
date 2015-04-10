@@ -2,7 +2,7 @@ extends layout
 block menuContenido
   -var menu = [["List","/panel/employees"],["Search","/search"]];
   -if (user) {
-  -var menu = [["List","/panel/employees"],["Search","/search"],["New Employees"," /panel/employees/new"]];
+  -var menu = [["List","/panel/employees"],["Search","/search"],["New Employees","/panel/employees/new"]];
   -}
   nav.navbar.navbar-default
     .container-fluid
@@ -11,10 +11,14 @@ block menuContenido
         a.navbar-brand(href='/') My first project
       #navbar.navbar-collapse.collapse
         ul.nav.navbar-nav
-          - for(key in menu){
+          -for(key in menu){
+          -if( menu[key][1] == url ){
+          li.active
+            a(href='#{menu[key][1]}') #{menu[key][0]}
+          -}else{
           li
             a(href='#{menu[key][1]}') #{menu[key][0]}
-          -};
+          -}};
         //  
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
