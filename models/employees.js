@@ -8,6 +8,12 @@ var employeesSchema = new Schema({
     password: String
 });
 
+employeesSchema.pre("save", function(next, done) {
+    if(false)
+         done();
+  next();
+});
+
 var employeesModel = mongoose.model('Employees', employeesSchema);
 
 module.exports = employeesModel;
