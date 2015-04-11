@@ -16,13 +16,15 @@ a.save(function(err, doc){
 describe('Probando conexión', function() {
     it('Conectado cuando no hay error', function() {
       before(function(done) {
-        mongoose.connect('mongodb://localhost/crudtest', function(error) {
+        mongoose = require('mongoose');
+
+      });
+              mongoose.connect('mongodb://localhost/crudtest', function(error) {
             if (error) 
               console.error('Error durante la conexión:\n%\n', error);
-            console.log('Conectado.');
+              console.log('Conectado.');
             done(error);
         });
-      });
       assert.equal(-1, -3);
       assert.equal(-1, -1);
     });
