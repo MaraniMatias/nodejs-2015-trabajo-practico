@@ -1,5 +1,5 @@
 var assert = require("assert")
-
+/*
 var Admin = require('../models/admins');
 var mongoose = require('mongoose');
 
@@ -12,20 +12,13 @@ a.save(function(err, doc){
     console.log("PasswordFAIL", a.authenticate("incorrect"));
     
 });
-
+*/
 describe('Probando conexión', function() {
-    it('Conectado cuando no hay error', function() {
-      before(function(done) {
+    before(function() {
         mongoose = require('mongoose');
-        mongoose.connect('mongodb://localhost/crudtest', function(error) {
-            if (error) 
-              console.error('Error durante la conexión:\n%\n', error);
-              console.log('Conectado.');
-            done(error);
-        });
-      });
+    });
+    it('Conectado cuando no hay error', function() {
 
-      //assert.equal(-1, -1);
     });
   
 });
@@ -41,7 +34,7 @@ describe('Documento en MongoDB', function() {
     assert.equal(-1, -1);
   });
   it('Borrar un documento', function() {
-    assert.equal(-1, -1);
+    assert.equal(-1, -2);
   });
 });
 
