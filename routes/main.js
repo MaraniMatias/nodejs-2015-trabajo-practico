@@ -31,11 +31,6 @@ app.get('/logout', function(req, res){
     req.logout();
     res.redirect('/panel/employees');
 });
-/*
-app.post('/login', function(req, res){
-    res.json(req.body);
-});
-*/
   
 // LISTADO
 app.get('/panel/employees', function(req, res){
