@@ -17,32 +17,31 @@ describe('Probando conexión', function() {
     it('Conectado cuando no hay error', function() {
       before(function(done) {
         mongoose = require('mongoose');
-
-      });
-              mongoose.connect('mongodb://localhost/crudtest', function(error) {
+        mongoose.connect('mongodb://localhost/crudtest', function(error) {
             if (error) 
               console.error('Error durante la conexión:\n%\n', error);
               console.log('Conectado.');
             done(error);
         });
-      assert.equal(-1, -3);
-      assert.equal(-1, -1);
+      });
+
+      //assert.equal(-1, -1);
     });
   
 });
 
 describe('Documento en MongoDB', function() {
   it('Leer un documento', function() {
-    // ...
+    assert.equal(-1, -1);
   });
   it('Crear un documento', function() {
-    // ...
+    assert.equal(-1, -1);
   });
   it('Editar un documento', function() {
-    // ...
+    assert.equal(-1, -1);
   });
   it('Borrar un documento', function() {
-    // ...
+    assert.equal(-1, -1);
   });
 });
 
