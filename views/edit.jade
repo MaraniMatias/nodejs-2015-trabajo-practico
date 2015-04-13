@@ -22,16 +22,17 @@ block content
           .small-8.columns
             label.inline(for='right-label') Employee details: 
               a#right-label(href='#', data-reveal-id='myModal') Click to view
-              #myModal.reveal-modal(data-reveal='', aria-labelledby='modalTitle', aria-hidden='true', role='dialog')
+              //expand, xlarge, large, medium, small
+              #myModal.reveal-modal.small(data-reveal='', aria-labelledby='modalTitle', aria-hidden='true', role='dialog')
                 h2#modalTitle Employee details.
                 h4 Employee name:
-                label.text-primary=person.name
+                  label.text-primary=person.name
                 h4.lead Employee surname:
-                label.text-muted=person.surname
+                  label.text-muted=person.surname
                 h4.lead Employee email:
-                label.text-success=person.email
+                  label.text-success=person.email
                 h4.lead Employee id:
-                label.text-info=person._id
+                  label.text-info=person._id
                 a.close-reveal-modal(aria-label='Close') &times;
 //p=JSON.stringify(person)  
 
