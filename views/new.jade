@@ -1,0 +1,35 @@
+extends menu
+block content
+  section.main-section
+    .row
+      h1.title= title
+    .row 
+      .large-12.columns
+        //p=JSON.stringify(persons)
+        -var msj = JSON.stringify(flashmsg);
+        -if(msj!='[]'){
+        p #{msj} XD
+        -};
+
+    form(action='',method='post')
+      .row
+        .large-6.columns
+          label(for='name') Name:
+          input(type='text', name='name', id='name', placeholder='Nombre')
+        .large-6.columns
+          label(for='surname') Surname:
+          input(type='text', name='surname', id='surname', placeholder='Apellido')
+      .row
+        .large-6.columns
+          label(for='email') Email:
+          input(type='email', name='email', id='email', placeholder='Email', required)
+      .row
+        .large-6.columns
+          label(for='password') Password:
+          input(type='text', name='password', id='password', placeholder='Contraseña')
+        .large-6.columns
+          label(for='password2') Confirmar Password:
+          input(type='text', name='password2', id='password2', placeholder='Confirmar Contraseña')
+       .row
+        .large-6.columns
+          button(type='submit') Save

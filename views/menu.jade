@@ -1,0 +1,47 @@
+extends layout
+block menuContenido
+  -var menu = [["List","/panel/employees"],["Search","/search"]];
+  -if (user) {
+  -var menu = [["List","/panel/employees"],["Search","/search"],["New Employees","/panel/employees/new"]];
+  -}
+  nav.top-bar(data-topbar='', role='navigation')
+    ul.title-area
+      li.name
+        h1
+          a(href='/') My first project
+      // Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+      li.toggle-topbar.menu-icon
+        a(href='#')
+          span Menu
+    section.top-bar-section
+      // Left Nav Section
+      ul.left
+        -for(key in menu){
+        -if( menu[key][1] == url ){
+        li.active
+          a(href='#{menu[key][1]}') #{menu[key][0]}
+        -}else{
+        li
+          a(href='#{menu[key][1]}') #{menu[key][0]}
+        -}};
+      // Right Nav Section
+      ul.right
+        -if (user) {
+        li
+          b #{user.email}
+        li.has-form
+          a.button.alert(href="/logout") Sign-Off
+        -}else{
+        li.has-form
+          a.button.success(role='button', aria-label='Login',href="/admin") Login
+        -}
+      //  
+        li.has-dropdown
+          a(href='#') Right Button Dropdown
+          ul.dropdown
+            li
+              a(href='#') First link in dropdown
+            li.active
+              a(href='#') Active link in dropdown
+  section.scroll-container(role='main')
+    block content

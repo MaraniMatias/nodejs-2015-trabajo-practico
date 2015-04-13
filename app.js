@@ -1,3 +1,7 @@
+var session = require('express-session');
+var flash = require('connect-flash');
+var passport = exports.passport = require('passport');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -9,9 +13,14 @@ var routes = require('./routes/index');
 var users = require('./routes/user');
 
 var app = express();
+//// agregado
+var mongoose = require('mongoose');
+//var fixtures = require('mongoose-fixtures');
+mongoose.connect('mongodb://localhost/crudtest');
+var app = exports.app = express();
+//// agregado
 
 // view engine setup
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -30,6 +39,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+//////////////////
+app.use(session({secret: 'supersecret', saveUninitialized: true, resave: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+require('./auth/local-strategy.js');
+require('./routes/main.js');
+//////////////////
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

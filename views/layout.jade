@@ -1,13 +1,33 @@
 doctype html
-html(lang='en')
+html(lang='es')
   head
     meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     title= title
     block css
-      link(rel='stylesheet', href='/css/style.css')
+      link(href='/components/foundation/css/foundation.css', rel='stylesheet')
+      link(href='/css/style.css',rel='stylesheet')
     block js
+    script(src='/components/foundation/js/vendor/modernizr.js')
       if ENV_DEVELOPMENT
         script(src='http://localhost:35729/livereload.js')
   body
-    block content
+    block menuContenido
+    -var year = new Date().getFullYear();
+    .row.max-width-X
+      hr
+      .row
+        .large-6.columns
+          p © Copyright 2015 - #{year}.
+        .large-6.columns
+          ul.inline-list.right
+            li
+              a(href='mailto:maranimatias@gmail.com') Marani Matias Ezequiel.
+  
+
+  script(src='/components/foundation/js/vendor/jquery.js')
+  script(src='/components/foundation/js/foundation/foundation.js')
+  script(src="/components/foundation/js/foundation/foundation.reveal.js")
+  script.
+      $(document).foundation();

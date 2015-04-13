@@ -1,0 +1,38 @@
+extends menu
+block content
+  section.main-section
+    .row
+      .large-12.columns
+        .row
+          h1.title= title
+        .row.content  
+          //p=JSON.stringify(persons)
+          -var msj =JSON.stringify(flashmsg);
+          -if(msj!='[]'){
+          p.text-info  #{msj}.
+          -};
+    .row.table
+        table
+          thead
+            tr
+              th #
+              th Name
+              th Surname
+              th Email
+              -if (user) {
+              th Options
+              -}
+          tbody
+          - persons.forEach(function(v,i){
+            tr
+              td=i
+              td=v.name
+              td=v.surname
+              td=v.email
+              -if (user) {
+              td
+                a(href="/edit/"+v._id) Edit
+                | 
+                a(href="/delete/"+v._id) Delete
+              -}
+          - });

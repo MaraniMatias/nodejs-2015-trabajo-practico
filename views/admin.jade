@@ -1,0 +1,30 @@
+extends menu
+block content
+  section.main-section
+    .row
+      .large-12.large-columns
+        .row
+          h1.title= title
+        .row.content  
+          //p=JSON.stringify(persons)
+          -var msj =JSON.stringify(flashmsg);
+          -if(msj!='[]'){
+          p.text-info  #{msj}.
+          -};
+     .center.row
+       .large-6.large-centered.columns
+          fieldset
+              legend Please login
+              .signup-panel
+                form(action='/admin', method='post')
+                  .row.collapse
+                    .small-12.columns
+                      label(for='inputEmail') Email address
+                      input(name='email', placeholder='Email address', required='required', type='text', autofocus='')
+                  .row.collapse
+                    .small-12.columns
+                      label(for='inputPassword') Password
+                      input(name='password', placeholder='Password', required='required', type='password')
+                  .row.collapse
+                    .small-12.columns
+                      input.button(value='Login', type='submit')
