@@ -11,16 +11,17 @@ block content
           -if(msj!='[]'){
           p.text-info  #{msj}.
           -};
-    .row.table
+    .row
+      .large-12.columns
         table
           thead
             tr
-              th #
-              th Name
-              th Surname
-              th Email
+              th(width='100') #
+              th(width='200') Name
+              th(width='200') Surname
+              th(width='200') Email
               -if (user) {
-              th Options
+              th(width='150') Options
               -}
           tbody
           - persons.forEach(function(v,i){

@@ -22,7 +22,7 @@ app.get('/admin', function(req, res){
 });
 app.post('/admin', passport.authenticate('AdminLogin', 
     { successRedirect: '/panel/employees', // autentificacion ok
-      failureRedirect: '/', //failureRedirect: '/login',
+      failureRedirect: '/admin', //failureRedirect: '/login',
       failureFlash: true })
 );
 app.get('/logout', function(req, res){

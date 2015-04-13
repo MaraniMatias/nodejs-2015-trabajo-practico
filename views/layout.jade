@@ -9,9 +9,9 @@ html(lang='es')
       link(href='/components/foundation/css/foundation.css', rel='stylesheet')
       link(href='/css/style.css',rel='stylesheet')
     block js
-    script(src='/components/foundation/js/vendor/modernizr.js')
-      if ENV_DEVELOPMENT
-        script(src='http://localhost:35729/livereload.js')
+      script(src='/components/foundation/js/vendor/modernizr.js')
+        if ENV_DEVELOPMENT
+          script(src='http://localhost:35729/livereload.js')
   body
     block menuContenido
     -var year = new Date().getFullYear();
@@ -28,6 +28,6 @@ html(lang='es')
 
   script(src='/components/foundation/js/vendor/jquery.js')
   script(src='/components/foundation/js/foundation/foundation.js')
-  script(src="/components/foundation/js/foundation/foundation.reveal.js")
+  script(src='/components/foundation/js/foundation/foundation.reveal.js')
   script.
       $(document).foundation();
