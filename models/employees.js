@@ -7,13 +7,17 @@ var employeesSchema = new Schema({
     name: String,
     surname: String,
     email: String,
-    password: String
+    password: String,
+    provider: String,
+    provider_id: {type :String, unique: true },
+    photo : String,
+    createdAt : {type: Date, default: Date.now}
 });
 
 employeesSchema.pre("save", function(next) {
     if(this.isModified('password'))
-        this.password = crypto.createHash(hash).update(this.password).digest("hex");
-    next();
+      this.password = crypto.createHash(hash).update(this.password).digest("hex");
+      next();
 });
 
 employeesSchema.method('authenticate', function(password) {

@@ -20,14 +20,16 @@ block content
               .row
                 .small-12.large-centered.columns
                   form(action='/admin', method='post')
-                    .row.collapse
+                    .row
                       .small-12.columns
                         label(for='inputEmail') Email address
                         input(name='email', placeholder='Email address', required='required', type='text', autofocus='')
-                    .row.collapse
+                    .row  
                       .small-12.columns
                         label(for='inputPassword') Password
                         input(name='password', placeholder='Password', required='required', type='password')
-                    .row.collapse
-                      .small-12.columns
-                        input.button(value='Login', type='submit')
+                    .row  
+                      .small-4.centered.columns
+                        button(type='submit') Login
+                      .small-8.centered.columns
+                        a(href="/admin/facebook") Login with Facebook

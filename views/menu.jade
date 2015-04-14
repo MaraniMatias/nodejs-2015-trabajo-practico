@@ -27,8 +27,12 @@ block menuContenido
       // Right Nav Section
       ul.right
         -if (user) {
+        -if(user.photo){
         li
-          a#right-label(href='#', data-reveal-id='myModalUser') #{user.email}
+          img(src="#{user.photo}")
+        -}
+        li
+          a#right-label(href='#', data-reveal-id='myModalUser') #{user.name}
           //expand, xlarge, large, medium, small
           #myModalUser.reveal-modal.small(data-reveal='', aria-labelledby='modalTitle', aria-hidden='true', role='dialog')
             h2#modalTitle User Details.

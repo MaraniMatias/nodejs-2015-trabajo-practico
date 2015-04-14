@@ -27,9 +27,18 @@ app.post('/admin', passport.authenticate('AdminLogin',
 );
 app.get('/logout', function(req, res){
     req.logout();
-    res.redirect('/panel/employees');
+    res.redirect('/');
 });
-  
+  //FACEBOOK
+  app.get('/admin/facebook', passport.authenticate('FacebookLogin'));
+  app.get('/admin/facebook/callback', passport.authenticate('FacebookLogin',
+      { successRedirect: '/panel/employees',
+        failureRedirect: '/admin'
+      })
+  );
+
+
+
 // LISTADO
 app.get('/panel/employees', function(req, res){
   var msg = req.flash('message'); // Read the flash message
