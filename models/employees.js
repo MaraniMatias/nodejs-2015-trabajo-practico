@@ -14,10 +14,19 @@ var employeesSchema = new Schema({
     createdAt : {type: Date, default: Date.now}
 });
 
-employeesSchema.pre("save", function(next) {
+var validar = function(){
+  if(false){
+    return new Error("no puedes usar ese email");
+  }
+};
+
+employeesSchema.pre("save", function(next, err) {
+  var miErr = validar();
+  if(!miErr){  
     if(this.isModified('password'))
       this.password = crypto.createHash(hash).update(this.password).digest("hex");
-      next();
+    next();
+  }  
 });
 
 employeesSchema.method('authenticate', function(password) {

@@ -42,18 +42,14 @@ block menuContenido
               .large-12.columns
                 h4 User name:
                 label.text-primary=user.name
-              .large-12.columns
                 -if(user.surname){
                 h4.lead User surname:
                 label.text-muted=user.surname
                 -}
-            .row
-              .large-12.columns  
-                -if(user.email){
+                - if(user.email){
                 h4.lead User email:
                 label.text-success=user.email
                 -}
-              .large-12.columns 
                 h4.lead User id:
                 label.text-info=user._id
             a.close-reveal-modal(aria-label='Close') &times;
