@@ -15,7 +15,8 @@ var users = require('./routes/user');
 var app = express();
 //// agregado
 var mongoose = require('mongoose');
-//var fixtures = require('mongoose-fixtures');
+var fixtures = require('mongoose-fixtures');
+fixtures.load('./fixtures/employees.js');
 mongoose.connect('mongodb://localhost/crudtest');
 var app = exports.app = express();
 //// agregado

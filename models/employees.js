@@ -1,4 +1,4 @@
-var hash ='sha512';//md5 sha512
+var hash ='sha256';//md5 sha512 sha256
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
