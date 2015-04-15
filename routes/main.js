@@ -58,11 +58,10 @@ app.get('/panel/employees/new', adminAuth, function(req, res){
     res.render('new', { title: 'New Employees', url: '/panel/employees/new' });
 });
 app.post('/panel/employees/new', adminAuth, function(req, res){
-  emp = new Employees({ name: req.body.name, surname: req.body.surname, email: req.body.email, password: req.body.password});
+  var emp = new Employees({ name: req.body.name, surname: req.body.surname, email: req.body.email, password: req.body.password});
   emp.save(function(err, doc){
     if(!err){
       res.redirect('/panel/employees');
-      done();
     }else{
       res.redirect('/error');   
     }
