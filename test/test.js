@@ -1,22 +1,4 @@
 var assert = require("assert");
-var chai = require('chai');
-chai.should();
-
-describe('Tes predeterminados', function(){  
-describe('chai', function(){  
-  it('debe fallar cuando afirmando falsa', function(){
-    false.should.equal(true)
-  })
-
-  it('debe pasar cuando el tipo de pruebas', function(){
-    "string".should.be.a("string")
-  })
-
-  it('debe pasar cuando las pruebas incluyen', function(){
-    [1,2,3].should.include(2)
-  })
-});
-
 
 describe('mocha', function(){  
   it('should fail when throwing an error', function(){
