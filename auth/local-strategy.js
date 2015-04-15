@@ -38,7 +38,7 @@ passport.use('FacebookLogin', new FacebookStrategy(
     callbackURL: '/admin/facebook/callback',
     profileFields : ['id', 'displayName', /*'provider', */'name' ,'photos']
   }, function(accessToken, refreshToken, profile, done) {
-		Admins.findOne({provider_id: profile.id, provider:profile.provider}, function(err, user) {
+		Admins.findOne({provider_id: profile.id /*,provider: profile.provider*/}, function(err, user) {
 			if(err) throw(err);
 			if(!err && user!= null) return done(null, user);
 			var user = new Admins({

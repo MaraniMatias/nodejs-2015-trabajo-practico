@@ -4,15 +4,16 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var employeesSchema = new Schema({
-    name: String,
-    surname: String,
-    email: String,
-    password: String,
-    provider: String,
-    provider_id: {type :String, unique: true },
+    name : String,
+    surname : String,
+    email : String,
+    password : String,
+    provider : String,
+    provider_id : {type :String, unique: true },
     photo : String,
     createdAt : {type: Date, default: Date.now}
 });
+
 
 var validar = function(){
   if(false){
@@ -20,13 +21,14 @@ var validar = function(){
   }
 };
 
-employeesSchema.pre("save", function(next, err) {
-  var miErr = validar();
-  if(!miErr){  
+
+employeesSchema.pre("save", function(next) {
+  //var miErr = validar();
+  //if(!miErr){  
     if(this.isModified('password'))
       this.password = crypto.createHash(hash).update(this.password).digest("hex");
     next();
-  }  
+  //}  
 });
 
 employeesSchema.method('authenticate', function(password) {

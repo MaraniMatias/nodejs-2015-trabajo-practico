@@ -15,9 +15,16 @@ var users = require('./routes/user');
 var app = express();
 //// agregado
 var mongoose = require('mongoose');
-var fixtures = require('mongoose-fixtures');
-fixtures.load('./fixtures/employees.js');
+//var fixtures = require('mongoose-fixtures');
 mongoose.connect('mongodb://localhost/crudtest');
+//fixtures.load('./fixtures/employees.js');
+var Employees = require('./models/employees.js');
+var emp = new Employees({ name: "admin",
+                          surname: "admin",
+                          email: "admin@admin.com", 
+                          password : "123456"
+                        });
+
 var app = exports.app = express();
 //// agregado
 

@@ -8,7 +8,7 @@ block content
         //p=JSON.stringify(persons)
         -var msj = JSON.stringify(flashmsg);
         -if(msj!='[]'){
-        p #{msj} XD
+        p #{msj}
         -};
 
     form(action='',method='post')
@@ -30,6 +30,6 @@ block content
         .large-6.columns
           label(for='password2') Confirmar Password:
           input(type='text', name='password2', id='password2', placeholder='Confirmar Contraseña')
-       .row
+      .row
         .large-6.columns
           button(type='submit') Save
