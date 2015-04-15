@@ -26,7 +26,7 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
           done();
       });
   });
-  it('-> Guardar documento. x2', function(done){
+  it('-> Guardar otro documento.', function(done){
       emp = new Employees({name : 'name3Test' , 
                            surname : 'surname3Test' ,
                            provider : 'test',
@@ -34,18 +34,27 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
                            password : 'test3' });
       emp.save(function(err,doc){
           if (err) throw err;
-          done();
+          done();  
       });
+      console.log('\t Id Guardo: ' + emp.id);
   });
   it('-> Editar documento', function() {
-      emp = new Employees({name : 'name2Test' , 
-                           surname : 'surname2Test' , 
-                           email : 'test2@test2.com' , 
-                           provider : 'test',
-                           password : 'test2' });
+      emp.name = 'name2Test' ;
+      emp.surname = 'surname2Test' ;
+      emp.email = 'test2@test2.com' ;
+      emp.provider = 'test';
+      emp.password = 'test2' ;
       emp.save(function(err,doc){
         if (err) throw err;
         done();
       });
-  });      
+      console.log('\t Id Editado. ' + emp.id);
+  });
+  it('-> Borrar documento', function() {
+      Employees.remove({ _id: emp.id },function(err,doc){
+        if (err) throw err;
+        done();
+      });
+      console.log('\t Id Borrado. ' + emp.id);
+  });
 });
