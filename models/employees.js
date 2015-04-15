@@ -8,7 +8,7 @@ var employeesSchema = new Schema({
     surname : String,
     email : String,
     password : String,
-    provider : String,
+    provider : {type : String, default: 'local' },
     provider_id : {type :String, unique: true },
     photo : String,
     createdAt : {type: Date, default: Date.now}

@@ -13,10 +13,12 @@ var routes = require('./routes/index');
 var users = require('./routes/user');
 
 var app = express();
+
 //// agregado
+var config = require('./config.js')
 var mongoose = require('mongoose');
 //var fixtures = require('mongoose-fixtures');
-mongoose.connect('mongodb://localhost/crudtest');
+mongoose.connect(config.mongoDB.url);
 //fixtures.load('./fixtures/employees.js');
 var Employees = require('./models/employees.js');
 var emp = new Employees({ name: "admin",
@@ -24,6 +26,7 @@ var emp = new Employees({ name: "admin",
                           email: "admin@admin.com", 
                           password : "123456"
                         });
+emp.save();
 
 var app = exports.app = express();
 //// agregado

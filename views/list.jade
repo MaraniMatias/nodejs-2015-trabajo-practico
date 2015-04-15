@@ -19,6 +19,7 @@ block content
               th(width='100') #
               th(width='200') Name
               th(width='200') Surname
+              th(width='200') Access type
               th(width='200') Email
               -if (user) {
               th(width='150') Options
@@ -29,6 +30,7 @@ block content
               td=i
               td=v.name
               td=v.surname
+              td=v.provider
               td=v.email
               -if (user) {
               td

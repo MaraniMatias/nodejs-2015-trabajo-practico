@@ -29,7 +29,10 @@ block content
                         label(for='inputPassword') Password
                         input(name='password', placeholder='Password', required='required', type='password')
                     .row  
-                      .small-4.centered.columns
+                      .small-4.columns
                         button(type='submit') Login
                       .small-8.centered.columns
-                        a(href="/admin/facebook") Login with Facebook
+                        .row
+                          a(href="/admin/facebook") Login with Facebook
+                        .row
+                          a(href="/admin/github") Login with Github

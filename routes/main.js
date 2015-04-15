@@ -19,9 +19,8 @@ app.get('/admin', function(req, res){
   res.render('admin', { title: 'Login', url: '/admin', flashmsg: msg});
 });
 app.post('/admin', passport.authenticate('AdminLogin', 
-    { successRedirect: '/panel/employees', // autentificacion ok
-      failureRedirect: '/admin', //failureRedirect: '/login',
-      failureFlash: true })
+    { successRedirect: '/panel/employees', 
+      failureRedirect: '/admin', failureFlash: true })
 );
 app.get('/logout', function(req, res){
     req.logout();
@@ -30,9 +29,13 @@ app.get('/logout', function(req, res){
   //FACEBOOK
   app.get('/admin/facebook', passport.authenticate('FacebookLogin'));
   app.get('/admin/facebook/callback', passport.authenticate('FacebookLogin',
-      { successRedirect: '/panel/employees',
-        failureRedirect: '/admin'
-      })
+      { successRedirect: '/panel/employees',failureRedirect: '/admin' })
+  );
+  //GITHUB
+  app.get('/admin/github', passport.authenticate('GithubLogin'));
+  app.get('/admin/github/callback', passport.authenticate('GithubLogin', 
+      {failureRedirect: '/admin' }) ,
+          function(req, res) { res.redirect('/panel/employees');}
   );
 
 // LISTADO
@@ -59,6 +62,7 @@ app.post('/panel/employees/new', adminAuth, function(req, res){
   emp.save(function(err, doc){
     if(!err){
       res.redirect('/panel/employees');
+      done();
     }else{
       res.redirect('/error');   
     }
