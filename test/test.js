@@ -2,12 +2,6 @@ var assert = require("assert");
 var chai = require('chai');
 chai.should();
 
-describe('Probando la conexion', function(){ 
-///////////////////////////
-  
-///////////////////////////
-});
-  
 describe('Tes predeterminados', function(){  
 describe('chai', function(){  
   it('debe fallar cuando afirmando falsa', function(){

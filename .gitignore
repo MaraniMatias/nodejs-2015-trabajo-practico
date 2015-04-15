@@ -1,4 +1,6 @@
 node_modules/
 public/components
 .sass-cache
-auth/config.js
+npm-debug.log
+.log
+
