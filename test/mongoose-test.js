@@ -1,8 +1,11 @@
 var Employees = require('../models/employees')
   , assert = require("assert")
+  , config = require('../config.js')
   //, should = require('should')
   , mongoose = require('mongoose')
-  , urlDB = "mongodb://localhost/tp-nodejs";
+  ;
+var urlDB = config.mongoDB.url;
+    
     
 describe('Conexion a MongoDB.', function(){
     it('-> No deveria dar error.', function(done){

@@ -21,12 +21,14 @@ var mongoose = require('mongoose');
 mongoose.connect(config.mongoDB.url);
 //fixtures.load('./fixtures/employees.js');
 var Employees = require('./models/employees.js');
+
 var emp = new Employees({ name: "admin",
                           surname: "admin",
                           email: "admin@admin.com", 
                           password : "123456"
                         });
 emp.save();
+
 
 var app = exports.app = express();
 //// agregado

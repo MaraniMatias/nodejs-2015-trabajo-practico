@@ -14,21 +14,19 @@ var employeesSchema = new Schema({
     createdAt : {type: Date, default: Date.now}
 });
 
-
-var validar = function(){
-  if(false){
-    return new Error("no puedes usar ese email");
-  }
-};
-
+employeesSchema.method('validad', function() {
+  if(this.password.length < 3 ){
+    return new Error("Password is short.");
+  };
+});
 
 employeesSchema.pre("save", function(next) {
-  //var miErr = validar();
+  //var miErr = Validar();
   //if(!miErr){  
     if(this.isModified('password'))
       this.password = crypto.createHash(hash).update(this.password).digest("hex");
     next();
-  //}  
+  //};
 });
 
 employeesSchema.method('authenticate', function(password) {

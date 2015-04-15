@@ -42,7 +42,7 @@ app.get('/logout', function(req, res){
 app.get('/panel/employees', function(req, res){
   var msg = req.flash('message'); // Read the flash message
   Employees.find({}, function(err, docs){
-    res.render('list', { title: 'List',  url: '/panel/employees' , persons: docs, flashmsg: msg}); // Pass Flash Message to the view
+    res.render('list', { title: 'Welcome',  url: '/panel/employees' , persons: docs, flashmsg: msg}); // Pass Flash Message to the view
   });
 });
 // SEARCH
