@@ -22,9 +22,8 @@ describe('Validad contraseña.', function(){
     emp = new Employees({ password : 'test' });
     emp.valodaPassword().should.not.be.ok; // no deveria ser verdadero
   });
-  
   it('-> Longitud de la contraseña es correcta', function(){
-      emp = new Employees({ password : 'pastest3' });
+      emp = new Employees({ password : 'Qwerty6@' });
     emp.valodaPassword().should.be.ok; // deveria ser verdadero
   });
 });

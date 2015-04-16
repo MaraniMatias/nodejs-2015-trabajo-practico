@@ -15,7 +15,7 @@ var employeesSchema = new Schema({
 });
 
 employeesSchema.method("valodaPassword", function() {
-     return this.password.length > 5 ;
+     return patterns.password.test(this.password);
 });
 
 employeesSchema.method("valodaEmail", function() {
@@ -31,7 +31,6 @@ employeesSchema.method("valodaSurname", function() {
 employeesSchema.method("valodaTextEmail", function() {
     return patterns.email.test(this.email);
 });
-
 
 
 employeesSchema.pre("save", function(next) {
