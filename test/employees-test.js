@@ -37,11 +37,11 @@ describe('Validad email.', function(){
     emp = new Employees({ email : "test@test.com"});
     emp.valodaEmail().should.be.ok;
   });
-  it('-> Valida E-Mail "test@test.com" es valido', function() {
+  it('-> El email "test@test.com" es valido', function() {
     emp = new Employees({ email : "test@test.com" });
     emp.valodaTextEmail().should.be.ok;
   });
-  it('-> Valida E-Mail "test@test" no valido', function() {
+  it('-> El email "test@test" no valido', function() {
     emp = new Employees({ email : "test@test" });
     emp.valodaTextEmail().should.not.be.ok;
   });

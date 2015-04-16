@@ -51,13 +51,13 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
         if (err) throw err;
         done();
       });
-      console.log('\t Id Editado. ' + emp.id);
+      console.log('\t Id Editado: ' + emp.id);
   });
   it('-> Borrar documento', function() {
       Employees.remove({ _id: emp.id },function(err,doc){
         if (err) throw err;
         done();
       });
-      console.log('\t Id Borrado. ' + emp.id);
+      console.log('\t Id Borrado: ' + emp.id);
   });
 });
