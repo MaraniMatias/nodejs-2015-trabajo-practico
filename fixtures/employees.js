@@ -1,13 +1,9 @@
 exports.Employees = [
-  { 
-    name: "admin",
-    surname: "admin",
-    email: "admin@admin.com", 
-    password : "123456"
-  }, { 
-    name: "admin2",
-    surname: "admin2",
-    email: "admin2@admin2.com", 
-    password : "123456"
-  },
+  { '_id' : 123125,  // fue para probar 
+   //porque siempre al asur fixture no me deja insertas mas docuemtnos
+    'name': "admin",
+    'surname': "admin",
+    'email': "admin@admin.com", 
+    'password' : "123456"
+  }
 ];

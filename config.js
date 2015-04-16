@@ -8,7 +8,7 @@ var config = {
     secret: '9c9a8ad7ec3a76e87d37b07aa665b9b472809086'
   },
   mongoDB:{
-    url:'mongodb://localhost/tpnodejs'
+    url:'mongodb://localhost/node'
   }
 };
 

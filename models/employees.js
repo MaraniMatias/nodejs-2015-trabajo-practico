@@ -14,24 +14,36 @@ var employeesSchema = new Schema({
     createdAt : {type: Date, default: Date.now}
 });
 
-employeesSchema.method('validad', function() {
-  if(this.password.length < 3 ){
-    return new Error("Password is short.");
-  };
+employeesSchema.method("valodaPassword", function() {
+     return this.password.length > 5 ;
 });
 
+employeesSchema.method("valodaEmail", function() {
+     return this.email != "admins@admin.com" ;
+});
+
+
+
+
+
+
+
 employeesSchema.pre("save", function(next) {
-  //var miErr = Validar();
-  //if(!miErr){  
     if(this.isModified('password'))
       this.password = crypto.createHash(hash).update(this.password).digest("hex");
     next();
-  //};
 });
 
 employeesSchema.method('authenticate', function(password) {
     return crypto.createHash(hash).update(password).digest("hex") === this.password;
 });
+
+employeesSchema.statics.customMethod = function (paramid, cb) {
+  var Employees = this;
+  Employees.findOne({ _id: paramid}, function(err, Employees){
+      cb(err, Employees);
+  });
+}
 
 var employeesModel = mongoose.model('Employees', employeesSchema);
 

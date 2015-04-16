@@ -19,7 +19,7 @@ var config = require('./config.js')
 var mongoose = require('mongoose');
 //var fixtures = require('mongoose-fixtures');
 mongoose.connect(config.mongoDB.url);
-//fixtures.load('./fixtures/employees.js');
+//fixtures.load('./fixtures/employees.js',function(e){console.log(e)};);
 var Employees = require('./models/employees.js');
 
 var emp = new Employees({ name: "admin",
