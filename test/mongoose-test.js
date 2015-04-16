@@ -19,40 +19,46 @@ describe('Conexion a MongoDB.', function(){
 
 describe('Metodos Employees que aplica an MongoDB.', function(){
   it('-> Guardar documento.', function(done){
-      employees = new Employees({name : 'nameTest' , 
+      employees = new Employees({name : 'empleadoUNO' , 
                                  surname : 'surnameTest' , 
                                  provider : 'test',
                                  email : 'test@test.com' , 
-                                 password : 'test' });
+                                 password : 'Test123@' });
       employees.save(function(err,doc){
           if (err) throw err;
           done();
       });
   });
   it('-> Guardar otro documento.', function(done){
-      emp = new Employees({name : 'name3Test' , 
-                           surname : 'surname3Test' ,
+      emp = new Employees({name : 'empleadoDOS' , 
+                           surname : 'surnameTestTres' ,
                            provider : 'test',
                            email : 'test3@test.com' , 
-                           password : 'test3' });
+                           password : 'Test123@' });
       emp.save(function(err,doc){
           if (err) throw err;
           done();  
       });
       console.log('\t Id Guardo: ' + emp.id);
   });
+/*
   it('-> Editar documento', function() {
-      emp.name = 'name2Test' ;
-      emp.surname = 'surname2Test' ;
-      emp.email = 'test2@test2.com' ;
-      emp.provider = 'test';
-      emp.password = 'test2' ;
-      emp.save(function(err,doc){
-        if (err) throw err;
-        done();
-      });
+    Employees.findOne({ _id: employees.id }, function(err, doc){
+      if (err) throw err;
+          doc.name = 'empleadoEDITADO' ;
+          doc.surname = 'surname2Test' ;
+          doc.email = 'test2@test2' ;
+          doc.provider = 'test';
+          doc.password = 'test' ;
+          doc.save(function(err,doc){
+            if (err) throw err;
+            done();
+          });
       console.log('\t Id Editado: ' + emp.id);
+    });
   });
+  */
+  /*
   it('-> Borrar documento', function() {
       Employees.remove({ _id: emp.id },function(err,doc){
         if (err) throw err;
@@ -60,4 +66,12 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
       });
       console.log('\t Id Borrado: ' + emp.id);
   });
+    it('-> Borrar documento', function() {
+      Employees.remove({ _id: employees.id },function(err,doc){
+        if (err) throw err;
+        done();
+      });
+      console.log('\t Id Borrado: ' + employees.id);
+  });
+  */
 });
