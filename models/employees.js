@@ -1,8 +1,8 @@
 var hash ='sha256';//md5 sha512 sha256
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var patterns = require('./patterns.js')
 var Schema = mongoose.Schema;
-
 var employeesSchema = new Schema({
     name : String,
     surname : String,
@@ -19,12 +19,18 @@ employeesSchema.method("valodaPassword", function() {
 });
 
 employeesSchema.method("valodaEmail", function() {
-     return this.email != "admins@admin.com" ;
+     return this.email != 'admins@admin.com' ;
 });
 
-
-
-
+employeesSchema.method("valodaName", function() {
+    return patterns.alpha.test(this.name);
+});
+employeesSchema.method("valodaSurname", function() {
+    return patterns.alpha.test(this.surname);
+});
+employeesSchema.method("valodaTextEmail", function() {
+    return patterns.email.test(this.email);
+});
 
 
 
