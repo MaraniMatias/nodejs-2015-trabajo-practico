@@ -18,8 +18,23 @@ employeesSchema.method("valodaPassword", function() {
      return patterns.password.test(this.password);
 });
 
+employeesSchema.method("valodaEmail2", function() {
+  var mierr;
+  if(this.email == 'admins@admin.com'){
+    mierr = new Error('That email is already in use.');
+  };
+  if(patterns.email.test(this.email)){
+    mierr = new Error('Please insert a valid email address.');
+  };
+  return mierr;
+});
+
+
 employeesSchema.method("valodaEmail", function() {
      return this.email != 'admins@admin.com' ;
+});
+employeesSchema.method("valodaTextEmail", function() {
+    return patterns.email.test(this.email);
 });
 
 employeesSchema.method("valodaName", function() {
@@ -28,9 +43,7 @@ employeesSchema.method("valodaName", function() {
 employeesSchema.method("valodaSurname", function() {
     return patterns.alpha.test(this.surname);
 });
-employeesSchema.method("valodaTextEmail", function() {
-    return patterns.email.test(this.email);
-});
+
 
 
 employeesSchema.pre("save", function(next) {

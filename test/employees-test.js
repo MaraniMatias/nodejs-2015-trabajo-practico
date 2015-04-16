@@ -29,34 +29,60 @@ describe('Validad contraseña.', function(){
 });
 
 describe('Validad email.', function(){ 
-  it('-> El email "admin@admid.com" NO se puede usar', function() {
+  it('-> El email "admin@admid.com" NO se puede usar.', function() {
     emp = new Employees({ email : 'admins@admin.com'});
      emp.valodaEmail().should.not.be.ok;
   });
-  it('-> El email "test@test.com" se puede usar', function() {
+  it('-> El email "test@test.com" se puede usar.', function() {
     emp = new Employees({ email : "test@test.com"});
     emp.valodaEmail().should.be.ok;
   });
-  it('-> El email "test@test.com" es valido', function() {
+  it('-> El email "test@test.com" es valido.', function() {
     emp = new Employees({ email : "test@test.com" });
     emp.valodaTextEmail().should.be.ok;
   });
-  it('-> El email "test@test" no valido', function() {
+  it('-> El email "test@test" no valido.', function() {
     emp = new Employees({ email : "test@test" });
     emp.valodaTextEmail().should.not.be.ok;
   });
 });
-  /*
-  it('-> Borrar documento', function() {
-      Employees.remove({ _id: emp.id },function(err,doc){
+
+
+describe('Validad email.', function(){ 
+  describe('Email Validos.', function(){ 
+    it('-> El email "test@test.com" se puede usar.', function() {
+      emp = new Employees({ email : "test@test.com"});
+      emp.valodaEmail2(function(err){
         if (err) throw err;
         done();
       });
-      console.log('\t Id Borrado. ' + emp.id);
+    });
+    it('-> El email "test@test.com" es valido.', function() {
+      emp = new Employees({ email : "test@test.com" });
+      emp.valodaEmail2(function(err){
+        if (err) throw err;
+        done();
+      });
+    });
   });
-*/
+  describe('Email Invalidos.', function(){ 
+    it('-> El email "admin@admid.com" NO se puede usar.', function() {
+      emp = new Employees({ email : 'admins@admin.com'});
+      emp.valodaEmail2(function(err){
+        if (err) throw err;
+        done();
+      });
+    });
+    it('-> El email "test@test" no valido.', function() {
+      emp = new Employees({ email : "test@test" });
+      emp.valodaEmail2(function(err){
+        if (err) throw err;
+        done();
+      });
+    });
+  });
 
-
+});
 
 /*
 describe('mocha', function(){  
