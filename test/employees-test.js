@@ -2,20 +2,8 @@ var Employees = require('../models/employees')
   , assert = require("assert")
   , config = require('../config.js')
   , should = require('should')
-  , mongoose = require('mongoose')
   ;
-var urlDB = config.mongoDB.url;
 
-/*
-describe('Mentodos de Employees.', function(){
-    it('-> No deveria dar error.', function(done){
-        mongoose.connect(urlDB , function(err){
-        if (err) throw err;
-        done();
-      });
-    })     
-});
-*/
 
 describe('Validad contraseña.', function(){
   it('-> Longitud de la contaseña es incorecta.', function(){
@@ -29,37 +17,17 @@ describe('Validad contraseña.', function(){
 });
 
 describe('Validad email.', function(){ 
-  it('-> El email "admin@admid.com" NO se puede usar.', function() {
-    emp = new Employees({ email : 'admins@admin.com'});
-     emp.valodaEmail().should.not.be.ok;
-  });
-  it('-> El email "test@test.com" se puede usar.', function() {
-    emp = new Employees({ email : "test@test.com"});
-    emp.valodaEmail().should.be.ok;
-  });
-  it('-> El email "test@test.com" es valido.', function() {
-    emp = new Employees({ email : "test@test.com" });
-    emp.valodaTextEmail().should.be.ok;
-  });
-  it('-> El email "test@test" no valido.', function() {
-    emp = new Employees({ email : "test@test" });
-    emp.valodaTextEmail().should.not.be.ok;
-  });
-});
-
-
-describe('Validad email.', function(){ 
   describe('Email Validos.', function(){ 
     it('-> El email "test@test.com" se puede usar.', function() {
       emp = new Employees({ email : "test@test.com"});
-      emp.valodaEmail2(function(err){
+      emp.valodaEmail(function(err){
         if (err) throw err;
         done();
       });
     });
     it('-> El email "test@test.com" es valido.', function() {
       emp = new Employees({ email : "test@test.com" });
-      emp.valodaEmail2(function(err){
+      emp.valodaEmail(function(err){
         if (err) throw err;
         done();
       });
@@ -68,14 +36,14 @@ describe('Validad email.', function(){
   describe('Email Invalidos.', function(){ 
     it('-> El email "admin@admid.com" NO se puede usar.', function() {
       emp = new Employees({ email : 'admins@admin.com'});
-      emp.valodaEmail2(function(err){
+      emp.valodaEmail(function(err){
         if (err) throw err;
         done();
       });
     });
     it('-> El email "test@test" no valido.', function() {
       emp = new Employees({ email : "test@test" });
-      emp.valodaEmail2(function(err){
+      emp.valodaEmail(function(err){
         if (err) throw err;
         done();
       });

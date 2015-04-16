@@ -18,30 +18,27 @@ employeesSchema.method("valodaPassword", function() {
      return patterns.password.test(this.password);
 });
 
-employeesSchema.method("valodaEmail2", function() {
+employeesSchema.method("valodaEmail", function() {
   var mierr;
+  // mirar si este email ya esta en la base de datos.
   if(this.email == 'admins@admin.com'){
-    mierr = new Error('That email is already in use.');
+    return = new Error('That email is already in use.');
   };
   if(patterns.email.test(this.email)){
-    mierr = new Error('Please insert a valid email address.');
+    return = new Error('Please insert a valid email address.');
   };
   return mierr;
 });
 
-
-employeesSchema.method("valodaEmail", function() {
-     return this.email != 'admins@admin.com' ;
-});
-employeesSchema.method("valodaTextEmail", function() {
-    return patterns.email.test(this.email);
-});
-
-employeesSchema.method("valodaName", function() {
-    return patterns.alpha.test(this.name);
-});
-employeesSchema.method("valodaSurname", function() {
-    return patterns.alpha.test(this.surname);
+employeesSchema.method("valodaNameSurname", function() {
+  var mierr;
+  if(patterns.alpha.test(this.name)){
+    mierr = new Error('Only letters allowed');
+  };
+  if(patterns.alpha.test(this.surname))){
+    mierr = new Error('Only letters allowed');
+  };
+  return mierr;
 });
 
 
