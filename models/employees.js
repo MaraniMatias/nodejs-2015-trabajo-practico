@@ -9,7 +9,7 @@ var employeesSchema = new Schema({
     email : String,
     password : String,
     provider : {type : String, default: 'local' },
-    provider_id : {type :String, unique: true },
+    provider_id :String ,//  {type :String ,unique: true },
     photo : String,
     createdAt : {type: Date, default: Date.now}
 });
@@ -55,40 +55,4 @@ employeesSchema.statics.customMethod = function (paramid, cb) {
 */
 
 var employeesModel = mongoose.model('Employees', employeesSchema);
-
 module.exports = employeesModel;
-
-/*
-
-employeesSchema.method("valodaPassword", function() {
-  if( patterns.password.test(this.password)){
-      return new Error('Please insert a valid password.');
-  };
-});
-
-employeesSchema.method("valodaEmail", function() {
-  var mierr;
-  // mirar si este email ya esta en la base de datos.
-  if(this.email == 'admins@admin.com'){
-    mierr = new Error('That email is already in use.');
-  };
-  if(patterns.email.test(this.email)){
-    mierr = new Error('Please insert a valid email address.');
-  };
-  return mierr;
-});
-
-employeesSchema.method("valodaNameSurname", function() {
-  var mierr;
-  if(patterns.alpha.test(this.name)){
-    mierr = new Error('Only letters allowed');
-  };
-  if(patterns.alpha.test(this.surname)){
-    mierr = new Error('Only letters allowed');
-  };
-  return mierr;
-});
-
-
-
-*/

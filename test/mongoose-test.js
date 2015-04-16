@@ -42,23 +42,23 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
       });
       console.log('\t Id Guardo: ' + emp.id);
   });
-  it('-> Editar documento', function() {
-    Employees.findOne({ _id: emp.id }, function(err, doc){
-      if (err) throw err;
-          doc.name = 'empleadoEDITADO' ;
-          doc.surname = 'surname2Test' ;
-          doc.email = 'test2@test2' ;
-          doc.provider = 'test';
-          doc.password = 'test' ;
-          doc.save(function(err,doc){
-            if (err) throw err;
-            done();
-          });
-      console.log('\t Id Editado: ' + doc.id);
-    });
-  });
-  
   /*
+  it('-> Editar documento', function() {
+    console.log('\t emp : ' + emp.id);
+    console.log('\t emp : ' + emp.name);
+          emp.name = 'empleadoEDITADO' ;
+          emp.surname = 'surname2Test' ;
+          emp.email = 'test2@test2.com' ;
+    console.log('\t emp Editado: ' + emp.id);
+    console.log('\t emp Editado: ' + emp.name);
+          emp.save(function(err,doc){
+              if (err) throw err;
+              done();
+          });
+
+  });
+  */
+  
   it('-> Borrar documento', function() {
       Employees.remove({ _id: emp.id },function(err,doc){
         if (err) throw err;
@@ -73,5 +73,5 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
       });
       console.log('\t Id Borrado: ' + employees.id);
   });
-  */
+  
 });
