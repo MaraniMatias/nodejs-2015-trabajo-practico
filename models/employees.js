@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var employeesSchema = new Schema({
     name : String,
     surname : String,
-    email : String,
+    email : {type : String , unique: true },
     password : String,
     provider : {type : String, default: 'local' },
     provider_id :String ,//  {type :String ,unique: true },

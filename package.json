@@ -30,6 +30,7 @@
     "grunt-develop": "~0.4.0",
     "load-grunt-tasks": "~3.1.0",
     "request": "~2.53.0",
-    "time-grunt": "~1.1.0"
+    "time-grunt": "~1.1.0",
+    "zombie": "^4.0.7"
   }
 }
