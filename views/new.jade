@@ -15,10 +15,11 @@ block content
       .row
         .large-6.columns
           label(for='name') Name:
-          input(type='text', name='name', id='name', placeholder='Nombre')
+          input(type='text', name='name', id='name', placeholder='Nombre' , pattern="alpha")
+          small.error(data-error-message) Solo se aceptan letras.
         .large-6.columns
           label(for='surname') Surname:
-          input(type='text', name='surname', id='surname', placeholder='Apellido')
+          input(type='text', name='surname', id='surname', placeholder='Apellido', pattern="alpha")
       .row
         .large-6.columns
           label(for='email') Email:
