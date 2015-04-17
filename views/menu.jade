@@ -40,18 +40,22 @@ block menuContenido
                 -}
             .row
               .large-12.columns
-                h4 User name:
-                label.text-primary=user.name
+                h4 Name: 
+                  small.text-primary=user.name
                 -if(user.surname){
-                h4.lead User surname:
-                label.text-muted=user.surname
+                h4.lead Surname: 
+                  small.text-muted=user.surname
                 -}
                 - if(user.email){
-                h4.lead User email:
-                label.text-success=user.email
+                h4.lead Email: 
+                  small.text-success=user.email
                 -}
-                h4.lead User id:
-                label.text-info=user._id
+                - if(user.provider){
+                h4.lead Provider: 
+                  small.text-success=user.provider
+                -}
+                h4.lead Id: 
+                  small.text-info=user._id
             a.close-reveal-modal(aria-label='Close') &times;
         li.has-form
           a.button.alert(href="/logout") Sign-Off

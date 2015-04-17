@@ -59,7 +59,7 @@ passport.use('GithubLogin', new GitHubStrategy({
     clientID: config.github.id,
     clientSecret: config.github.secret,
     callbackURL: '/admin/github/callback',
-    profileFields : ['id', 'displayName']
+    profileFields : ['id', 'displayName','name' ,'photos']
   },
     function(accessToken, refreshToken, profile, done) {
         process.nextTick(function () {

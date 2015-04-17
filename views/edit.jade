@@ -26,17 +26,21 @@ block content
               #myModal.reveal-modal.small(data-reveal='', aria-labelledby='modalTitle', aria-hidden='true', role='dialog')
                 h2#modalTitle Employee details.
                 -if(person.name){
-                h4 Employee name:
-                  label.text-primary=person.name
+                h4 Name: 
+                  small.text-primary=person.name
                 -}if(person.surname){
-                h4.lead Employee surname:
-                  label.text-muted=person.surname
+                h4.lead Surname: 
+                  small.text-muted=person.surname
                 -}if(person.email){
-                h4.lead Employee email:
-                  label.text-success=person.email
+                h4.lead Email: 
+                  small.text-success=person.email
                 -}
-                h4.lead Employee id:
-                  label.text-info=person._id
+                - if(user.provider){
+                h4.lead Provider: 
+                  small.text-success=user.provider
+                -}
+                h4.lead Id: 
+                  small.text-info=person._id
                 a.close-reveal-modal(aria-label='Close') &times;
 //p=JSON.stringify(person)  
 

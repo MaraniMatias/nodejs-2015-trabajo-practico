@@ -9,6 +9,9 @@ var config = {
   },
   mongoDB:{
     url:'mongodb://localhost/tpnode'
+  },
+  urlPag:{
+    url : 'http://localhost:3200/'
   }
 };
 

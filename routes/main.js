@@ -23,7 +23,8 @@ app.post('/admin', passport.authenticate('AdminLogin',
       failureRedirect: '/admin' })
 );
 app.get('/logout', function(req, res){
-    req.logout(); res.redirect('/');
+    req.logout();
+    res.redirect('/');
 });
   //FACEBOOK
   app.get('/admin/facebook', passport.authenticate('FacebookLogin'));
