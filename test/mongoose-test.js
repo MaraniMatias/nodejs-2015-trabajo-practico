@@ -24,10 +24,7 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
                                  provider : 'test',
                                  email : 'test@test.com' , 
                                  password : 'Test123@' });
-      employees.save(function(err,doc){
-          if (err) throw err;
-          done();
-      });
+      employees.save(done);
       console.log('\t Id Guardo: ' + employees.id);
   });
   it('-> Guardar otro documento.', function(done){
@@ -36,10 +33,7 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
                            provider : 'test',
                            email : 'test3@test.com' , 
                            password : 'Test123@' });
-      emp.save(function(err,doc){
-          if (err) throw err;
-          done();  
-      });
+      emp.save(done);
       console.log('\t Id Guardo: ' + emp.id);
   });
   /*
@@ -51,10 +45,7 @@ describe('Metodos Employees que aplica an MongoDB.', function(){
           emp.email = 'test2@test2.com' ;
     console.log('\t emp Editado: ' + emp.id);
     console.log('\t emp Editado: ' + emp.name);
-          emp.save(function(err,doc){
-              if (err) throw err;
-              done();
-          });
+          emp.save(dones);
 
   });
   */

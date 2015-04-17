@@ -15,208 +15,364 @@ describe('Conexion a MongoDB.', function(){
     })     
 });
 
-describe('Validad contraseña.', function(done){
-  describe('- Contaseña es incorecta.', function(done){
-    it('should not throw an error', function(){
-      function isPositive(n) {
-          if(n <= 0) throw new Error('Given number is not positive')
-      }
-      isPositive.bind(null, -10).should.throw();
+describe('Validad contraseña.', function(){
+  describe('- Contaseña es incorecta.', function(){
+    it('-> qwe', function(){
+      employees = new Employees({name : 'empleadoUNO' , 
+                                 surname : 'surnameTest' , 
+                                 provider : 'test',
+                                 email : 'test@test.com' , 
+                                 password : 'qwe' });
+
+      employees.save(function(err){
+         should(err).be.not.empty;
+      });
     });
-    it('should not throw an error', function(){
-      function isPositive(n) {
-          if(n <= 0) throw new Error('Given number is not positive')
-      }
-      isPositive.bind(null, -10).should.throw();
-    });
-    it('-> qwe', function(done){
-      (function(done){ 
-         employees = new Employees({name : 'empleadoUNO' , 
-                                   surname : 'surnameTest' , 
-                                   provider : 'test',
-                                   email : 'test@test.com' , 
-                                   password : 'qwe' });
-        employees.save(function(err,doc){
-            if (err) throw err;
-            done();
-        });
-      }).should.throw();
-    });
-    it('-> qwertyyyy', function(done){
-      (function(){ 
+    it('-> qwertyyyy', function(){
         employees = new Employees({name : 'empleadoUNO' , 
                                    surname : 'surnameTest' , 
                                    provider : 'test',
                                    email : 'test@test.com' , 
                                    password : 'qwertyyyy' });
-        employees.save(function(err,doc){
-            if (err) throw err;
-            done();
+        employees.save(function(err){
+         should(err).be.not.empty;
         });
-      }).should.throw();
+
     });
-    it('-> querty1213', function(done){
-      (function(){ 
+    it('-> querty1213', function(){
         employees = new Employees({name : 'empleadoUNO' , 
                                    surname : 'surnameTest' , 
                                    provider : 'test',
                                    email : 'test@test.com' , 
                                    password : 'querty1213' });
-        employees.save(function(err,doc){
-            if (err) throw err;
-            done();
+        employees.save(function(err){
+         should(err).be.not.empty;
         });
-      }).should.throw();
+
     });
-    it('-> 123456789', function(done){
-      (function(){ 
+    it('-> 123456789', function(){
+
         employees = new Employees({name : 'empleadoUNO' , 
                                    surname : 'surnameTest' , 
                                    provider : 'test',
                                    email : 'test@test.com' , 
                                    password : '123456789' });
-        employees.save(function(err,doc){
-            if (err) throw err;
-            done();
+        employees.save(function(err){
+         should(err).be.not.empty;
         });
-      }).should.throw();
+
     });
-    it('-> 1234567@', function(done){
-      (function(){ 
+    it('-> 1234567@', function(){
+    
         employees = new Employees({name : 'empleadoUNO' , 
                                    surname : 'surnameTest' , 
                                    provider : 'test',
                                    email : 'test@test.com' , 
                                    password : '1234567@' });
-        employees.save(function(err,doc){
-            if (err) throw err;
-            done();
+        employees.save(function(err){
+            should(err).be.not.empty;
         });
-      }).should.throw();
+
     });
-    it('-> Qwerty123' , function(done){
-      (function(){ 
+    it('-> Qwerty123' , function(){
+  
         employees = new Employees({name : 'empleadoUNO' , 
                                    surname : 'surnameTest' , 
                                    provider : 'test',
                                    email : 'test@test.com' , 
                                    password : 'Qwerty123' });
-        employees.save(function(err,doc){
-            if (err) throw err;
-            done();
+        employees.save(function(err){
+            should(err).be.not.empty;
         });
-      }).should.throw();
+ 
     });
-    it('-> @qwerty123', function(done){
-      (function(){ 
+    it('-> @qwerty123', function(){
         employees = new Employees({name : 'empleadoUNO' , 
                                    surname : 'surnameTest' , 
                                    provider : 'test',
                                    email : 'test@test.com' , 
                                    password : '@qwerty123' });
-        employees.save(function(err,doc){
-            if (err) throw err;
-            done();
+        employees.save(function(err){
+            should(err).be.not.empty;
         });
-      }).should.throw();
     });
   });
-    describe('- Contraseña es correcta.', function(done){
-      it('-> @Qwerty123', function(done){
+    describe('- Contraseña es correcta.', function(){
+      it('-> @Qwerty123', function(){
+        employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'test@test.com' , 
+                                   password : '@Qwerty123' });
+        employees.save(function(err){
+            should(err).be.empty;
+        });
       });
-      it('-> 123456 con email admin@admin.com', function(done){
+      it.skip('-> 123456 con email admin@admin.com', function(){
+        employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin@admin.com' , 
+                                   password : '123456' });
+        employees.save(function(err){
+            should(err).be.empty;
+        });
       });
     });
 });
 
-describe('Validad email.', function(done){
-  describe('- Email es incorecta.', function(done){
-    it('-> admin@admin.com', function(done){
+describe('Validad email.', function(){
+  describe('- Email es incorecta.', function(){
+    it.skip('-> admin@admin.com', function(){
+        employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin@admin.com' , 
+                                   password : '@Qwerty123' });
+        employees.save(function(err){
+            should(err).be.not.empty;
+        });
     });
-    it('-> admin@admin', function(done){
+    it('-> admin@admin', function(){
+       employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin@admin' , 
+                                   password : '@Qwerty123' });
+        employees.save(function(err){
+            should(err).be.not.empty;
+        });
     });
-    it('-> admin.com', function(done){
+    it('-> admin.com', function(){
+        employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin.com' , 
+                                   password : '@Qwerty123' });
+        employees.save(function(err){
+            should(err).be.not.empty;
+        });
     });
-    it('-> admin', function(done){
+    it('-> admin', function(){
+        employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin' , 
+                                   password : '@Qwerty123' });
+        employees.save(function(err){
+            should(err).be.not.empty;
+        });
     });
-    it('-> admin@', function(done){
+    it('-> admin@', function(){
+        employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin@' , 
+                                   password : '@Qwerty123' });
+        employees.save(function(err){
+            should(err).be.not.empty;
+        });
     });
-    it('-> admin@admin@admin.com' , function(done){
+    it('-> admin@admin@admin.com' , function(){
+        employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin@admin@admin.com' , 
+                                   password : '@Qwerty123' });
+        employees.save(function(err){
+            should(err).be.not.empty;
+        });
     });
-    it('-> a@admin.com.admin@admin', function(done){
+    it('-> a@admin.com.admin@admin', function(){
+        employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'a@admin.com.admin@admin' , 
+                                   password : '@Qwerty123' });
+        employees.save(function(err){
+            should(err).be.not.empty;
+        });
     });
   });
-  describe('- Email es correcta.', function(done){
-    it('-> admin@admin.com.ar', function(done){
+  describe('- Email es correcta.', function(){
+    it('-> admin@admin.com.ar', function(){
+      employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin@admin.com.ar' , 
+                                   password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.empty;
+      });
     });
-    it('-> matias@admin.com', function(done){
+    it('-> matias@admin.com', function(){
+      employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'matias@admin.com' , 
+                                   password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.empty;
+      });
     });
-    it('-> admin@admin.com con contraseña 123456 ', function(done){
+    it.skip('-> admin@admin.com con contraseña 123456 ', function(){
+      employees = new Employees({name : 'empleadoUNO' , 
+                                   surname : 'surnameTest' , 
+                                   provider : 'test',
+                                   email : 'admin@admin.com' , 
+                                   password : '123456' });
+      employees.save(function(err){
+          should(err).be.empty;
+      });
     });
   });
 });
   
-describe('Validad nombre.', function(done){
-  describe('- Nombre es incorecta.', function(done){
-    it('-> admin@admin.com', function(done){
+describe('Validad nombre.', function(){
+  describe('- Nombre es incorecta.', function(){
+    it('-> admin@admin.com', function(){
+      employees = new Employees({name : 'admin@admin.com' , 
+                                 surname : 'surnameTest' , 
+                                 provider : 'test',
+                                 email : 'admin@admin.com' , 
+                                 password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
-    it('-> nobre1', function(done){
+    it('-> nobre1', function(){
+      employees = new Employees({name : 'nobre1' , 
+                                 surname : 'surnameTest' , 
+                                 provider : 'test',
+                                 email : 'admin@admin.com' , 
+                                 password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
-    it('-> a', function(done){
+    it('-> a', function(){
+      employees = new Employees({name : 'a' , 
+                                 surname : 'surnameTest' , 
+                                 provider : 'test',
+                                 email : 'admin@admin.com' , 
+                                 password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
-    it('-> 1nombre', function(done){
+    it('-> 1nombre', function(){
+      employees = new Employees({name : '1nombre' , 
+                                 surname : 'surnameTest' , 
+                                 provider : 'test',
+                                 email : 'admin@admin.com' , 
+                                 password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
-    it('-> nombre@', function(done){
+    it('-> nombre@', function(){
+      employees = new Employees({name : 'nombre@' , 
+                                 surname : 'surnameTest' , 
+                                 provider : 'test',
+                                 email : 'admin@admin.com' , 
+                                 password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
   });
   describe('- Nombre es correcta.', function(done){
-    it('-> matias', function(done){
+    it('-> matias', function(){
+      employees = new Employees({name : 'matias' , 
+                                 surname : 'surnameTest' , 
+                                 provider : 'test',
+                                 email : 'admin@admin.com' , 
+                                 password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.empty;
+      });
     });
   });
 });
     
 describe('Validad apellido.', function(done){
   describe('- Apellido es incorecta.', function(done){
-    it('-> admin@admin.com', function(done){
+    it('-> nobre1', function(){
+        employees = new Employees({name : 'matias' , 
+                                   surname : 'nobre1' , 
+                                   provider : 'test',
+                                   email : 'admin@admin.com' , 
+                                   password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
-    it('-> nobre1', function(done){
+    it('-> a', function(){
+        employees = new Employees({name : 'matias' , 
+                                   surname : 'a' , 
+                                   provider : 'test',
+                                   email : 'admin@admin.com' , 
+                                   password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
-    it('-> a', function(done){
+    it('-> 1nombre', function(){
+        employees = new Employees({name : 'matias' , 
+                                   surname : '1nombre' , 
+                                   provider : 'test',
+                                   email : 'admin@admin.com' , 
+                                   password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
-    it('-> 1nombre', function(done){
-    });
-    it('-> nombre@', function(done){
+    it('-> nombre@', function(){
+        employees = new Employees({name : 'matias' , 
+                                   surname : 'nombre@' , 
+                                   provider : 'test',
+                                   email : 'admin@admin.com' , 
+                                   password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
   });
   describe('- Apellido es correcta.', function(done){
-    it('-> matias', function(done){
+    it('-> matias', function(){
+      employees = new Employees({name : 'matias' , 
+                                 surname : 'matias' , 
+                                 provider : 'test',
+                                 email : 'admin@admin.com' , 
+                                 password : '@Qwerty123' });
+      employees.save(function(err){
+          should(err).be.not.empty;
+      });
     });
   });
 });
 
     
 describe('Metodos Employees que aplica an MongoDB.', function(done){
-  it('-> Guardar documento.', function(done){
+  it('-> Guardar documento.', function(){
       employees = new Employees({name : 'empleadoUNO' , 
                                  surname : 'surnameTest' , 
                                  provider : 'test',
                                  email : 'test@test.com' , 
                                  password : 'Test123@' });
-      employees.save(function(err,doc){
-          if (err) throw err;
-          done();
+      employees.save(function(err){
+          should(err).be.not.empty;
       });
       console.log('\t Id Guardo: ' + employees.id);
   });
-  it('-> Guardar otro documento.', function(done){
+  it('-> Guardar otro documento.', function(){
       emp = new Employees({name : 'empleadoDOS' , 
                            surname : 'surnameTestTres' ,
                            provider : 'test',
                            email : 'test3@test.com' , 
                            password : 'Test123@' });
-      emp.save(function(err,doc){
-          if (err) throw err;
-          done();  
+      emp.save(function(err){
+          should(err).be.not.empty;
       });
       console.log('\t Id Guardo: ' + emp.id);
   });

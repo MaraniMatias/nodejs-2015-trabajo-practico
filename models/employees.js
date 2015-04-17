@@ -32,7 +32,7 @@ Employees.schema.path('name').validate(function (value) {
 }, 'Only letters allowed for name.');
 
 Employees.schema.path('surname').validate(function (value) {
-   return patterns.alpha.test(value);
+  return patterns.alpha.test(value);
 }, 'Only letters accepted for surname.');
 
 
