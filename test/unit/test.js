@@ -255,7 +255,7 @@ describe('Metodos Employees que aplica an MongoDB.', function(done){
       console.log('\t Id Guardo: ' + employees.id);
   });
   it('-> Guardar otro documento.', function(){
-      emp = new Employees({name : 'empleadoDOS' , 
+    emp = new Employees({name : 'empleadoDOS' , 
                            surname : 'surnameTestTres' ,
                            provider : 'test',
                            email : 'test3@test.com' , 
@@ -267,7 +267,7 @@ describe('Metodos Employees que aplica an MongoDB.', function(done){
       console.log('\t Id Guardo: ' + emp.id);
   });
   
-  it('-> Editar documento', function() {
+  it.skip('-> Editar documento', function() {
     console.log('\t emp : ' + emp.id);
     console.log('\t emp : ' + emp.name);
           emp.name = 'empleadoEDITADO' ;
