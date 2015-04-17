@@ -1,4 +1,4 @@
-var hash ='sha256';//md5 sha512 sha256
+var hash ='md5';//md5 sha512 sha256
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var patterns = require('./patterns.js')
@@ -6,41 +6,18 @@ var Schema = mongoose.Schema;
 var employeesSchema = new Schema({
     name : String,
     surname : String,
-    email : {type : String , unique: true },
+    email : String, 
+    //{type : String , unique: true },
     password : String,
     provider : {type : String, default: 'local' },
-    provider_id :String ,//  {type :String ,unique: true },
+    provider_id : String ,
     photo : String,
     createdAt : {type: Date, default: Date.now}
 });
-var Employees = mongoose.model('Employees', employeesSchema);
 
-Employees.schema.path('password').validate(function (value) {
-  if(value=='123456' && this.email == 'admon@admin.com' ){
-    return true;
-  }
-  else{
-    return patterns.password.test(value);
-  }
-}, 'Please insert a valid password.');
-
-Employees.schema.path('email').validate(function (value) {
-    return patterns.email.test(value)
-}, 'Please insert a valid email address');
-/* lo hace la db
-Employees.schema.path('email').validate(function (value) {
-  // mirar si este email ya esta en la base de datos.
-  return this.email != 'admins@admin.com';
-}, 'That email is already in use.');
-*/
-Employees.schema.path('name').validate(function (value) {
-  return patterns.alpha.test(value);
-}, 'Only letters allowed for name.');
-
-Employees.schema.path('surname').validate(function (value) {
-  return patterns.alpha.test(value);
-}, 'Only letters accepted for surname.');
-
+employeesSchema.method('authenticate', function(password) {
+  return crypto.createHash(hash).update(password).digest("hex") === this.password;
+});
 
 employeesSchema.pre("save", function(next) {
     if(this.isModified('password'))
@@ -48,9 +25,6 @@ employeesSchema.pre("save", function(next) {
     next();
 });
 
-employeesSchema.method('authenticate', function(password) {
-    return crypto.createHash(hash).update(password).digest("hex") === this.password;
-});
 /*
 employeesSchema.statics.customMethod = function (paramid, cb) {
   var Employees = this;
@@ -61,4 +35,25 @@ employeesSchema.statics.customMethod = function (paramid, cb) {
 */
 
 var employeesModel = mongoose.model('Employees', employeesSchema);
+
+employeesModel.schema.path('password').validate(function (value) {
+  //if(value=='123456' && this.email == 'admin@admin.com' ){
+    return true;
+  //}else{
+    return patterns.number.test(value);
+  //}
+}, 'Please insert a valid password.');
+
+employeesModel.schema.path('email').validate(function (value) {
+    return patterns.email.test(value)
+}, 'Please insert a valid email address');
+
+employeesModel.schema.path('name').validate(function (value) {
+  return patterns.alpha.test(value);
+}, 'Only letters allowed for name.');
+
+employeesModel.schema.path('surname').validate(function (value) {
+  return patterns.alpha.test(value);
+}, 'Only letters accepted for surname.');
+
 module.exports = employeesModel;

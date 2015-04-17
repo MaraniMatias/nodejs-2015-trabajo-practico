@@ -1,17 +1,14 @@
-var passport = module.parent.exports.passport
+var passport =  require('passport')//module.parent.exports.passport
   , Employess = require('../models/employees.js')
   , LocalStrategy = require('passport-local').Strategy
   , FacebookStrategy = require('passport-facebook').Strategy
   , GitHubStrategy = require('passport-github').Strategy
   , config = require('../config.js')
-;
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+  //, adminAuth = {}
+;  
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+passport.serializeUser(function(user, done) { done(null, user);});
+passport.deserializeUser(function(user, done) { done(null, user);});
 
 passport.use('AdminLogin', new LocalStrategy(
   {

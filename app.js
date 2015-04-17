@@ -17,18 +17,18 @@ var app = express();
 //// agregado
 var config = require('./config.js')
 var mongoose = require('mongoose');
-//var fixtures = require('mongoose-fixtures');
+var fixtures = require('mongoose-fixtures');
+fixtures.load('./fixtures/employees.js');
 mongoose.connect(config.mongoDB.url);
-//fixtures.load('./fixtures/employees.js',function(e){console.log(e)};);
 var Employees = require('./models/employees.js');
-
+/*
 var emp = new Employees({ name: "admin",
                           surname: "admin",
                           email: "admin@admin.com", 
-                          password : "123456"
+                          password : "Qwerty@123"
                         });
 emp.save();
-
+*/
 
 var app = exports.app = express();
 //// agregado

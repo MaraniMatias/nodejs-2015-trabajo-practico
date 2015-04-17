@@ -5,34 +5,36 @@ block content
       .large-12.large-columns
         .row
           h1.title= title
-     .center.row
-       .large-6.large-centered.columns
-          fieldset
-            legend Please login
-            .signup-panel
-              .row  
-                .small-12.large-centered.columns
-                  //p=JSON.stringify(persons)
-                  -var msj =JSON.stringify(flashmsg);
-                  -if(msj!='[]'){
-                  p.text-info  #{msj}.
-                  -};
-              .row
-                .small-12.large-centered.columns
-                  form(action='/admin', method='post')
-                    .row
-                      .small-12.columns
-                        label(for='inputEmail') Email address
-                        input(name='email', placeholder='Email address', required='required', type='text', autofocus='')
-                    .row  
-                      .small-12.columns
-                        label(for='inputPassword') Password
-                        input(name='password', placeholder='Password', required='required', type='password')
-                    .row  
-                      .small-4.columns
-                        button(type='submit') Login
-                      .small-8.centered.columns
-                        .row
-                          a(href="/admin/facebook") Login with Facebook
-                        .row
-                          a(href="/admin/github") Login with Github
+    .row.max-width-X
+      .large-6.large-centered.columns
+        fieldset
+          legend Please login
+          .signup-panel
+            .row  
+              .small-12.large-centered.columns
+                !{form}
+                !{csrf_form_html}
+                //p=JSON.stringify(persons)
+                -var msj =JSON.stringify(flashmsg);
+                -if(msj!='[]'){
+                p.text-info  #{msj}.
+                -};
+            .row
+              .small-12.large-centered.columns
+                form(action='/admin', method='post')
+                  .row
+                    .small-12.columns
+                      label(for='inputEmail') Email address
+                      input(name='email', placeholder='Email address', required='required', type='text', autofocus='')
+                  .row  
+                    .small-12.columns
+                      label(for='inputPassword') Password
+                      input(name='password', placeholder='Password', required='required', type='password')
+                  .row  
+                    .small-4.columns
+                      button(type='submit') Login
+                    .small-8.centered.columns
+                      .row
+                        a(href="/admin/facebook") Login with Facebook
+                      .row
+                        a(href="/admin/github") Login with Github

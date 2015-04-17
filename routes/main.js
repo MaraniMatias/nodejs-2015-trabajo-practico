@@ -20,11 +20,10 @@ app.get('/admin', function(req, res){
 });
 app.post('/admin', passport.authenticate('AdminLogin', 
     { successRedirect: '/panel/employees', 
-      failureRedirect: '/admin', failureFlash: true })
+      failureRedirect: '/admin' })
 );
 app.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
+    req.logout(); res.redirect('/');
 });
   //FACEBOOK
   app.get('/admin/facebook', passport.authenticate('FacebookLogin'));
