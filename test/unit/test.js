@@ -311,7 +311,6 @@ describe('Metodos Employees que aplica an MongoDB.', function(done){
           });
       console.log('\t Id Guardo: ' + emp.id);
   });
-  
   describe('- Autenticacion del administrador.', function(){
     it('-> Correto',function(){
       should(emp.authenticate("123456")).be.ok;
