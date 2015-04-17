@@ -86,7 +86,7 @@ describe('Validad contraseña.', function(){
 
 describe('Validad email.', function(){
   describe('- Email es incorecta.', function(){
-    it.skip('-> admin@admin.com', function(){
+    it('-> admin@admin.com', function(){
         employees = new Employees({name : 'empleadoUNO' , 
                                    surname : 'surnameTest' , 
                                    provider : 'test',
@@ -267,7 +267,7 @@ describe('Metodos Employees que aplica an MongoDB.', function(done){
       console.log('\t Id Guardo: ' + emp.id);
   });
   
-  it.skip('-> Editar documento', function() {
+  it('-> Editar documento', function() {
     console.log('\t emp : ' + emp.id);
     console.log('\t emp : ' + emp.name);
           emp.name = 'empleadoEDITADO' ;
@@ -283,14 +283,14 @@ describe('Metodos Employees que aplica an MongoDB.', function(done){
   });
   
   
-  it.skip('-> Borrar documento', function() {
+  it('-> Borrar documento', function() {
       Employees.remove({ _id: emp.id },function(err,doc){
         if (err) throw err;
         done();
       });
       console.log('\t Id Borrado: ' + emp.id);
   });
-    it.skip('-> Borrar documento', function() {
+    it('-> Borrar documento', function() {
       Employees.remove({ _id: employees.id },function(err,doc){
         if (err) throw err;
         done();
@@ -311,5 +311,15 @@ describe('Metodos Employees que aplica an MongoDB.', function(done){
           });
       console.log('\t Id Guardo: ' + emp.id);
   });
+  
+  describe('- Autenticacion del administrador.', function(){
+    it('-> Correto',function(){
+      should(emp.authenticate("123456")).be.ok;
+    });
+    it('-> Imcorecto',function(){
+      should(emp.authenticate("incorrect")).not.be.ok;
+    });
+}); 
+
   
 });

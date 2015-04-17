@@ -1,4 +1,4 @@
-var hash ='md5';//md5 sha512 sha256
+var hash ='sha256';//md5 sha512 sha256
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var patterns = require('./patterns.js')
@@ -6,8 +6,7 @@ var Schema = mongoose.Schema;
 var employeesSchema = new Schema({
     name : String,
     surname : String,
-    email : String, 
-    //{type : String , unique: true },
+    email : {type : String , unique: true },
     password : String,
     provider : {type : String, default: 'local' },
     provider_id : String ,
@@ -35,15 +34,15 @@ employeesSchema.statics.customMethod = function (paramid, cb) {
 */
 
 var employeesModel = mongoose.model('Employees', employeesSchema);
-
+/*
 employeesModel.schema.path('password').validate(function (value) {
   //if(value=='123456' && this.email == 'admin@admin.com' ){
-    return true;
   //}else{
+    //return patterns.password.test(value);
     return patterns.number.test(value);
   //}
 }, 'Please insert a valid password.');
-
+*/
 employeesModel.schema.path('email').validate(function (value) {
     return patterns.email.test(value)
 }, 'Please insert a valid email address');
