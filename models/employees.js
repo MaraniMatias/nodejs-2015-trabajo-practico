@@ -22,11 +22,12 @@ Employees.schema.path('password').validate(function (value) {
 Employees.schema.path('email').validate(function (value) {
     return patterns.email.test(value)
 }, 'Please insert a valid email address');
+/*
 Employees.schema.path('email').validate(function (value) {
   // mirar si este email ya esta en la base de datos.
   return this.email != 'admins@admin.com';
 }, 'That email is already in use.');
-
+*/
 Employees.schema.path('name').validate(function (value) {
   return patterns.alpha.test(value);
 }, 'Only letters allowed for name.');
