@@ -78,5 +78,3 @@ passport.use('GithubLogin', new GitHubStrategy({
        })
     }
 ));
-
-

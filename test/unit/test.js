@@ -284,18 +284,18 @@ describe('Metodos Employees que aplica an MongoDB.', function(done){
   
   
   it('-> Borrar documento', function() {
-      Employees.remove({ _id: emp.id },function(err,doc){
-        if (err) throw err;
-        done();
-      });
-      console.log('\t Id Borrado: ' + emp.id);
-  });
-    it('-> Borrar documento', function() {
       Employees.remove({ _id: employees.id },function(err,doc){
         if (err) throw err;
         done();
       });
       console.log('\t Id Borrado: ' + employees.id);
+  });
+    it('-> Borrar documento', function() {
+      Employees.remove({ _id: emp.id },function(err,doc){
+        if (err) throw err;
+        done();
+      });
+      console.log('\t Id Borrado: ' + emp.id);
   });
   
   it('-> Guardar Administrador.', function(){
