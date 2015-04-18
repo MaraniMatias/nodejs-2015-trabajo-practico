@@ -15,7 +15,6 @@ passport.use('AdminLogin', new LocalStrategy( {
     passwordField: 'password'
   },
   function(username, password, done) {
-    //if(profile!=null)  done(null, profile);
     Employess.findOne({ email:username }, function(err, adm) {
       if (err) { return done(err); }
       if (!adm) {
@@ -35,7 +34,6 @@ passport.use('FacebookLogin', new FacebookStrategy( {
     callbackURL: '/admin/facebook/callback',
     profileFields : ['id', 'displayName', /*'provider', */'name' ,'photos']
   }, function(accessToken, refreshToken, profile, done) {
-    //if(profile!=null)  done(null, profile);
 	Employess.findOne({provider_id: profile.id /*,provider: profile.provider*/}, 
             function(err, user) {
               if(err) throw(err);
@@ -62,7 +60,6 @@ passport.use('GithubLogin', new GitHubStrategy( {
     callbackURL: '/admin/github/callback',
     profileFields : ['id', 'displayName','name' ,'photos']
   },
-    //if(profile!=null)  done(null, profile);
     function(accessToken, refreshToken, profile, done) {
       process.nextTick(function () {
         var user = new Employess({
