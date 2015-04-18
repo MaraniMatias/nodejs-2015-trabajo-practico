@@ -36,7 +36,7 @@ employeesSchema.statics.customMethod = function (paramid, cb) {
 var employeesModel = mongoose.model('Employees', employeesSchema);
 
 employeesModel.schema.path('password').validate(function (value) {
-  if(this._di=null){
+  if(this._di!=null){
       if(this.email == "admin@admin.com" ){
           return patterns.number.test(value);
       }else{
@@ -46,7 +46,9 @@ employeesModel.schema.path('password').validate(function (value) {
 }, 'Please insert a valid password.');
 
 employeesModel.schema.path('email').validate(function (value) {
+  if(this.provider_id==null){
   return patterns.email.test(value)
+  }
 }, 'Please insert a valid email address');
 
 employeesModel.schema.path('name').validate(function (value) {

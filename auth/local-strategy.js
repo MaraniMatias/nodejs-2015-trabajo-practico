@@ -7,15 +7,15 @@ var passport =  require('passport')//module.parent.exports.passport
   //, adminAuth = {}
 ;  
 
-passport.serializeUser(function(user, done) { done(null, user);});
+passport.serializeUser(function(user, done) { done(null ,user); });
 passport.deserializeUser(function(user, done) { done(null, user);});
 
-passport.use('AdminLogin', new LocalStrategy(
-  {
+passport.use('AdminLogin', new LocalStrategy( {
     usernameField: 'email',
     passwordField: 'password'
   },
   function(username, password, done) {
+    //if(profile!=null)  done(null, profile);
     Employess.findOne({ email:username }, function(err, adm) {
       if (err) { return done(err); }
       if (!adm) {
@@ -29,14 +29,14 @@ passport.use('AdminLogin', new LocalStrategy(
   }
 ));
 
-passport.use('FacebookLogin', new FacebookStrategy(
-  {
+passport.use('FacebookLogin', new FacebookStrategy( {
     clientID : config.facebook.id,
     clientSecret : config.facebook.secret,
     callbackURL: '/admin/facebook/callback',
     profileFields : ['id', 'displayName', /*'provider', */'name' ,'photos']
   }, function(accessToken, refreshToken, profile, done) {
-		Employess.findOne({provider_id: profile.id /*,provider: profile.provider*/}, 
+    //if(profile!=null)  done(null, profile);
+	Employess.findOne({provider_id: profile.id /*,provider: profile.provider*/}, 
             function(err, user) {
               if(err) throw(err);
               if(!err && user!= null) return done(null, user);
@@ -51,30 +51,32 @@ passport.use('FacebookLogin', new FacebookStrategy(
                   if(err) throw err;
                   done(null, user);
               });
+
 		  });
     }
 ));
 
-passport.use('GithubLogin', new GitHubStrategy({
+passport.use('GithubLogin', new GitHubStrategy( {
     clientID: config.github.id,
     clientSecret: config.github.secret,
     callbackURL: '/admin/github/callback',
     profileFields : ['id', 'displayName','name' ,'photos']
   },
+    //if(profile!=null)  done(null, profile);
     function(accessToken, refreshToken, profile, done) {
-        process.nextTick(function () {
-            var user = new Employess({
+      process.nextTick(function () {
+        var user = new Employess({
                   provider_id	: profile.id,
                   provider : 'github',
-                  email : profile.email,
-                  name : profile.displayName,
-                  photo : profile.avatar_url
+                  email : profile._json.email,
+                  name : profile._json.name,
+                  photo : profile._json.avatar_url
               });
               user.save(function(err) {
                   if(err) throw err;
                   done(null, user);
               });
-          done(null, profile);
-       })
+      
+       });
     }
 ));
