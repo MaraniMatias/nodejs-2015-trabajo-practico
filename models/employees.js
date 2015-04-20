@@ -24,14 +24,16 @@ employeesSchema.pre("save", function(next) {
     next();
 });
 
-/*
+
 employeesSchema.statics.customMethod = function (paramid, cb) {
   var Employees = this;
   Employees.findOne({ _id: paramid}, function(err, Employees){
       cb(err, Employees);
   });
 };
-*/
+
+
+
 
 var employeesModel = mongoose.model('Employees', employeesSchema);
 
