@@ -1,2 +1,28 @@
 extends menu
 block content
+  section.main-section
+    .row.max-width-X
+      .row
+        .large-12.large-centered.columns
+          .row
+            h1.title Employees Wiki
+            p Welcome to Employees Wiki.
+          .row.content
+            -var msj =JSON.stringify(flashmsg);
+            -if(msj!='[]'){
+            p.text-info  #{msj}.
+            -};
+      .row
+        .small-6.large-centered.columns
+          form(action='/admin', method='post')
+            .row.collapse
+              label(for='inputSearch') Search by name or sername.
+              .small-10.columns
+                input(name='Search', placeholder='Name or Surname', required='required', type='text', autofocus='')
+              .small-2.columns
+                a.button.postfix(href='#',type='button') Search
+      .row
+        select.js-data-example-ajax
+          option(value='3620194', selected='selected') select2/select2
+
+

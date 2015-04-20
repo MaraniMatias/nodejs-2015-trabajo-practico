@@ -5,13 +5,12 @@ block content
       .large-12.columns
         .row
           h1.title= title
-        .row.content  
-          //p=JSON.stringify(persons)
+        .row.content
           -var msj =JSON.stringify(flashmsg);
           -if(msj!='[]'){
           p.text-info  #{msj}.
           -};
-    .row
+    .row.max-width-X
       .large-12.columns.table-responsive
         table.table()
           thead

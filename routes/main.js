@@ -55,6 +55,11 @@ app.get('/search', function(req, res){
     res.render('search', { title: 'Search', url: '/search', flashmsg: msg});
   });
 });
+app.get('/search/res', function(req, res){
+  Employees.find({}, function(err, docs){
+    res.json(docs);
+  });
+});
 // SAVE
 app.get('/panel/employees/new', adminAuth, function(req, res){
     req.flash('message', 'You visited /new'); 
