@@ -10,8 +10,9 @@ var config = {
   mongoDB:{
     url:'mongodb://localhost/tpnode'
   },
-  urlPag:{
-    url : 'http://localhost:3200/'
+  app:{
+    domain : 'localhost',
+    port: 3200
   }
 };
 
