@@ -27,7 +27,7 @@ block content
           tbody
           - persons.forEach(function(v,i){
             tr
-              td=i
+              td(name=v.email)=i
               td=v.name
               td=v.surname
               td=v.provider

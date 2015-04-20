@@ -19,8 +19,8 @@ describe('CRUD Sample '+d, function(){
         // It show create a new document in the database
         sample = new Sample({ name : 'empleado' , 
                               surname : 'surname' ,
-                              provider : 'test'+Math.floor((Math.random() * 10) + 1),
-                              email : 'test3@test.com' , 
+                              provider : 'test',
+                              email : 'test@test'+Math.floor((Math.random() * 1000) + 1)+'.com' , 
                               password : 'Qwerty@123'});
         sample.save();
         sampleId = sample._id;
@@ -79,14 +79,13 @@ describe('CRUD Sample '+d, function(){
                 
                 //console.log(browser.document.querySelectorAll('form[name="myForm"]')[0].innerHTML);
                 //sampleEdited = "sample"+new Date().getTime(); //nuevo nombre con las hora
-                sampleEdited = "nuevo nombre";
-                console.log("1--->", browser.userAgent);
+                sampleEdited = "nuevoEditado";
                 //console.log(browser.html());
                 
                 browser
                   .fill('form[name="myForm"] input[name="name"]', sampleEdited)
                   .fill('form[name="myForm"] input[name="surname"]', 'apellidoTest')
-                  .fill('form[name="myForm"] input[name="email"]', 'adm@email.com')
+                  .fill('form[name="myForm"] input[name="email"]', 'adm@email'+Math.floor((Math.random() * 1000) + 1)+'.com')
                   .pressButton('Save',function(err, b){
                   // https://github.com/angular/angular.js/issues/3915
                   //console.log("--->", browser.html());
@@ -105,19 +104,38 @@ describe('CRUD Sample '+d, function(){
               });
            });
         });
-/*
-        it('Create Samples', function(done){
-           browser.visit(d+"/admin/panel#/crud/sample", function () {
+
+        it('Alta de employees', function(done){
+           browser.visit(d+"/panel/employees/new", function () {
               //console.log("0--->", browser.text('[ng-view]'));
               assert.ok(browser.success);
-              assert.ok(browser.location.hash === "#/crud/sample");
-              browser.visit(d+'/admin/panel#/crud/sample-new', function(){
+              assert.ok(browser.location.href === d+'/panel/employees/new');
+
+              //browser.visit(d+'/panel/employees/new', function(){
                 //console.log("1--->", browser.text('[ng-view]'));
-                sampleNew = "samplenew"+new Date().getTime();
+                sampleNew = "nuevoEmpleadoTest" ; //+new Date().getTime();
+                emailNew = 'adm@email'+Math.floor((Math.random() * 1000) + 1)+'.com';
                 browser
-                 .fill('form[name="myForm"] input[name="name"]', sampleNew)
-                 .pressButton('button[ng-click="save()"]',function(err, b){
+                  .fill('form[name="formNew"] input[name="name"]', sampleNew)
+                  .fill('form[name="formNew"] input[name="surname"]', 'apellidoTest')
+                  .fill('form[name="formNew"] input[name="email"]', emailNew)
+                  .fill('form[name="formNew"] input[name="password"]', 'Qwerty@123')
+                  .fill('form[name="formNew"] input[name="password2"]', 'Qwerty@123')
+                .pressButton('Save',function(err, b){
                    //console.log("2--->", browser.text('[ng-view]'));
+                  
+                  browser.visit(d+"/panel/employees", function () {
+                       //console.log(browser.document.location.hash);
+                       //console.log(browser.document.querySelectorAll('body')[0].innerHTML);
+                       //browser.fill('input[ng-model="search"]', sampleEdited);
+                       browser.wait(function(){
+                          console.log(browser.document.querySelectorAll('table')[0].innerHTML);
+                           assert.ok(browser.document.querySelectorAll('table tr td[neme='+emailNew+']').length > 0,'Debe mostrar un documento recientemente editado enumerado');
+                            done();
+                       });
+                   });
+                  
+                  /*
                    browser.visit(d+"/admin/panel#/crud/sample", function () {
                        browser.fill('input[ng-model="search"]', sampleNew);
                        browser.wait(function(){
@@ -127,11 +145,12 @@ describe('CRUD Sample '+d, function(){
                             done();
                        });
                    });
-                });
+                   */
+               // });
               });
            });
         });
-
+/*
         it('Delete Samples', function(done){
            browser.visit(d+"/admin/panel#/crud/sample", function () {
               assert.ok(browser.success);
