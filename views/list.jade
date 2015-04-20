@@ -12,22 +12,22 @@ block content
           p.text-info  #{msj}.
           -};
     .row
-      .large-12.columns
-        table
+      .large-12.columns.table-responsive
+        table.table()
           thead
             tr
-              th(width='100') #
-              th(width='200') Name
-              th(width='200') Surname
-              th(width='200') Record type
-              th(width='200') Email
+              th(scope="column") #
+              th(scope="column") Name
+              th(scope="column") Surname
+              th(scope="column") Record type
+              th(scope="column") Email
               -if (user) {
-              th(width='150') Options
+              th(scope="column") Options
               -}
           tbody
           - persons.forEach(function(v,i){
             tr
-              td(name=v.email)=i
+              td(id=v._id)=i
               td=v.name
               td=v.surname
               td=v.provider
@@ -35,7 +35,7 @@ block content
               -if (user) {
               td
                 a(href="/edit/"+v._id) Edit  
-                |  
-                a(href="/delete/"+v._id) Delete 
+                | -  
+                a.text-danger(href="/delete/"+v._id) Delete 
               -}
           - });
