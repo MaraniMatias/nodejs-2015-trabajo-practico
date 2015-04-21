@@ -91,13 +91,24 @@ app.post('/panel/employees/new', adminAuth, function(req, res){
 });
 // REMOVE
 app.get('/delete/:id', adminAuth, function(req, res){
+   
     Employees.remove({ _id: req.params.id }, function(err, doc){
-        if(!err){
-            res.redirect('/panel/employees');
-        } else {
-            res.end(err);    
-        }    
+        if(!err){ res.redirect('/panel/employees');
+        } else { res.end(err);   }    
     });
+  
+/*
+  try {
+  throw "thrown message";
+}
+catch (e) {
+  console.log(e);
+  console.log("leaving catch block");
+}
+finally {
+  console.log("entering and leaving the finally block");
+}*/
+  
 });
 // EDIT
 app.get('/edit/:id',adminAuth, function(req, res){
@@ -110,38 +121,15 @@ app.get('/edit/:id',adminAuth, function(req, res){
     });
 });
 app.post('/edit/:id',adminAuth, function(req, res){
-    Employees.findOne({ _id: req.params.id }, function(err, doc){
-        if(!err){
-            doc.name = req.body.name; 
-            doc.surname = req.body.surname;
-            doc.email = req.body.email;
-            doc.save(function(err, doc){
-              if(!err){
-                  res.redirect('/panel/employees');
-              } else {
-                console.log(err);
-                  res.end(err);    
-              }    
-            }); 
-        } else {
-            res.end(err);    
-        }    
-    });
+  Employees.findOne({ _id: req.params.id }, function(err, doc){
+  if(!err){
+      doc.name = req.body.name; 
+      doc.surname = req.body.surname;
+      doc.email = req.body.email;
+      doc.save(function(err, doc){
+        if(!err){  res.redirect('/panel/employees');
+        } else {  res.end(err);  }    
+      }); 
+  } else { res.end(err);     }    
+  });
 });
-
-
-
-
-try {
-  console.log("entering try block");
-  throw "thrown message";
-  console.log("this message is never seen");
-}
-catch (e) {
-  console.log("entering catch block");
-  console.log(e);
-  console.log("leaving catch block");
-}
-finally {
-  console.log("entering and leaving the finally block");
-}
