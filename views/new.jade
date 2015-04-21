@@ -11,37 +11,42 @@ block content
         p #{msj}
         -};
     .row.max-width-X
-      .large-12.columns 
-        form(name='formNew',action='',method='post')
-          //.row
+      .small-12.medium-12.large-12.columns
+        form(name='formNew',action='',method='post',data-abide='')
+          .row
             .small-12.medium-6.large-6.columns
-              label(for='nombre2') Nombre 
-                small requerido
-              input#nombre2(type='text', name='nombre2', placeholder='Nombre', value='',  pattern='alpha')
-              small.error(data-error-message='') Solo se aceptan letras.
-            .smalladmin@admin.com-12.medium-6.large-6.columns
-              label(for='apellido2') Apellido 
-                small requerido
-              input#apellido2(type='text', name='apellido2', placeholder='Apellido', value='',  pattern='alpha')
-              small.error(data-error-message='') Solo se aceptan letras.
+              label(for='name') Name: 
+                small required
+                input(type='text', name='name', id='name', placeholder='Name',  pattern='alpha',required)
+              small.error Name is required and only letters are accepted.
+            .small-12.medium-6.large-6.columns
+              label(for='surname') Surname: 
+                small required
+                input(type='text', name='surname', id='surname', placeholder='Surname',pattern='alpha',required)
+              small.error Surname is required and only letters are accepted.
           .row
-            .large-6.columns
-              label(for='name') Name:
-              input(type='text', name='name', id='name', placeholder='Nombre')
-            .large-6.columns
-              label(for='surname') Surname:
-              input(type='text', name='surname', id='surname', placeholder='Apellido')
+            .small-12.medium-6.large-6.columns
+              label(for='email') Email: 
+                small required
+                input(type='email', name='email', id='email', placeholder='Email',pattern='email' ,required)
+              small.error Email is required and only email are accepted.
           .row
-            .large-6.columns
-              label(for='email') Email:
-              input(type='email', name='email', id='email', placeholder='Email', required)
+            .small-12.medium-6.large-6.columns
+              label(for='password') Password: 
+                small required
+                input(type='password', name='password', id='password', placeholder='Contraseña',required)
+                small.error The password must be at least 8 characters, with one number, one special and one uppercase.
+            .small-12.medium-6.large-6.columns
+              label(for='password2') Confirmar Password: 
+                small required
+                input(type='password', name='password2', id='password2', data-equalto='password',required ,placeholder='Confirmar Contraseña')
+                small.error The key must be the same as before.
           .row
-            .large-6.columns
-              label(for='password') Password:
-              input(type='text', name='password', id='password', placeholder='Contraseña')
-            .large-6.columns
-              label(for='password2') Confirmar Password:
-              input(type='password', name='password2', id='password2', placeholder='Confirmar Contraseña')
-          .row
-            .large-6.columns
+            .small-12.medium-6.large-6.columns
               button(type='submit') Save
+  
+      
+              
+              
+              
+              
