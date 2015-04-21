@@ -40,7 +40,26 @@ html(lang='es-AR')
   script.
     //ACÁ SE LE DA EL ESTILO AL CONTENIDO QUE SE QUIERE MOSTRAR EN EL DESPLEGABLE
     function repoFormatResult(repo) {
-
+    var provedor='';
+    if(!repo.surname){repo.surname='';};
+    if(!repo.name){repo.name='';};
+    if(!repo.email){repo.email='';};
+    if(!repo.photo){repo.photo='';};
+    if(repo.provider=='local'){
+    provedor='<leabe>' + repo.provider + '</leabe>';
+    };
+    if(repo.provider=='web'){
+    provedor='<leabe class="text-info">' + repo.provider + '</leabe>';
+    };
+    if(repo.provider=='test'){
+    provedor='<leabe calse="text-warning">' + repo.provider + '</leabe>';
+    };
+    if(repo.provider=='facebook'){
+    provedor='<leabe class="text-primary">' + repo.provider + '</leabe>';
+    };
+    if(repo.provider=='github'){
+    provedor='<leabe class="text-success">' + repo.provider + '</leabe>';
+    };
     var markup = 
     '<div class="row collapse">' +
       '<div class="small-2 columns">' +
@@ -48,13 +67,11 @@ html(lang='es-AR')
       '</div>' +
       '<div clas="small-10 columns">' +
         '<div class="row collapse">' +
-          '<div class="small-6 columns">' + repo.name + '</div>' +
-          '<div class="small-4 columns">' + repo.surname + '</div>' +
-          
+          '<div class="small-10 columns">' + repo.name +' '+ repo.surname +'</div>' +
+          //'<div class="small-4 columns">' + repo.surname + '</div>' +
         '<div class="row collapse">' +
-          
-          '<div class="small-10 columns">' + repo.email + '</div>' +
-            
+          '<div class="small-5 columns">' + repo.email + '</div>' +
+          '<div class="small-5 columns">'+ provedor +'</div>' +
         '</div>'+
           
         '</div>'+
@@ -64,7 +81,7 @@ html(lang='es-AR')
     }
     
     function repoFormatSelection(repo) {
-    return repo.full_name;
+    return repo._id;
     }
   script#script_e6.
     //ACÁ SE LE DAN LOS DATOS DE BUSQUEDA
@@ -102,12 +119,6 @@ html(lang='es-AR')
     });
     });
     
-    //ÉSTO HACE QUE SE MUESTRE EL CONTENIDO SELECCIONADO DENTRO DE UN ELEMENTO DE LA PÁGINA
-    function log(e) {
-    var e=$("<li>"+e+"</li>");
-    $("#events_11").append(e);
-    e.animate({opacity:1}, 10000, 'linear', function() { e.animate({opacity:0}, 2000, 'linear', function() {e.remove(); }); });
-    }
     //ACÁ SE DICE QUE CUANDO SE SELECCIONE EL ELEMENTO SE LLAME A LA FUNCIÓN log QUE ESTA ACA ARRIBA
     $("#e6")
     .on("select2-selecting", function(e) { log ("selecting val="+ e.val+" choice="+ JSON.stringify(e.choice));});

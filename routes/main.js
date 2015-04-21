@@ -60,8 +60,13 @@ app.get('/search/res', function(req, res,next){
   var re = new RegExp(req.query.q, 'i');
   if(req.query.q) {
 	Employees.find().or([{name :{ $regex: re }},{  surname: { $regex: re } }]).exec(function(err, docs){
-      console.log(docs);
+      docs.forEach(function(element, index, array){
+                    element.password=undefined;
+                    element.__v=undefined;
+                    element.createdAt=undefined;
+                   });
       res.json(docs);
+      
     });//.exec(callback);
   }
   
