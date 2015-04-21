@@ -66,12 +66,8 @@ app.get('/search/res', function(req, res,next){
                     element.createdAt=undefined;
                    });
       res.json(docs);
-      
-    });//.exec(callback);
+    });
   }
-  
-  
-  
 });
 
 // SAVE
@@ -132,3 +128,20 @@ app.post('/edit/:id',adminAuth, function(req, res){
         }    
     });
 });
+
+
+
+
+try {
+  console.log("entering try block");
+  throw "thrown message";
+  console.log("this message is never seen");
+}
+catch (e) {
+  console.log("entering catch block");
+  console.log(e);
+  console.log("leaving catch block");
+}
+finally {
+  console.log("entering and leaving the finally block");
+}

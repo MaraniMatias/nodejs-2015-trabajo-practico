@@ -36,7 +36,7 @@ html(lang='es-AR')
 
     script.
       $(document).foundation();
-
+-if('/search' == url ){
     script.
       //ACÁ SE LE DA EL ESTILO AL CONTENIDO QUE SE QUIERE MOSTRAR EN EL DESPLEGABLE
       function repoFormatResult(repo) {
@@ -122,3 +122,4 @@ html(lang='es-AR')
       //ACÁ SE DICE QUE CUANDO SE SELECCIONE EL ELEMENTO SE LLAME A LA FUNCIÓN log QUE ESTA ACA ARRIBA
       $("#e6")
       .on("select2-selecting", function(e) { log ("selecting val="+ e.val+" choice="+ JSON.stringify(e.choice));});
+-};
