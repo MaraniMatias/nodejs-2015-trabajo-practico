@@ -1,5 +1,6 @@
 var app = module.parent.exports.app;
 var Employees = require('../models/employees.js');
+var config = require('../config.js');
 var passport = module.parent.exports.passport;
 var adminAuth = function(req, res, next){
   if(typeof req.user != "undefined"){
@@ -55,11 +56,18 @@ app.get('/search', function(req, res){
     res.render('search', { title: 'Search', url: '/search', flashmsg: msg});
   });
 });
-app.get('/search/res', function(req, res){
-  Employees.find({}, function(err, docs){
-    res.json(docs);
-  });
+app.get('/search/res', function(req, res,next){
+  
+  if(req.query.q) {
+	Employees.find({name :  req.query.q }, function(err, docs){
+      res.json(docs);
+    });//.exec(callback);
+  }
+  
+  
+  
 });
+
 // SAVE
 app.get('/panel/employees/new', adminAuth, function(req, res){
     req.flash('message', 'You visited /new'); 
@@ -69,6 +77,7 @@ app.post('/panel/employees/new', adminAuth, function(req, res){
   var emp = new Employees({name: req.body.name, 
                            surname: req.body.surname,
                            email: req.body.email, 
+                           photo: 'http://'+config.app.domain+':'+config.app.port + '/img/avatar_nodejs.png' ,
                            password: req.body.password , 
                            provider: 'web'});
   emp.save(function(err, doc){
