@@ -57,9 +57,10 @@ app.get('/search', function(req, res){
   });
 });
 app.get('/search/res', function(req, res,next){
-  
+  var re = new RegExp(req.query.q, 'i');
   if(req.query.q) {
-	Employees.find({name :  req.query.q }, function(err, docs){
+	Employees.find().or([{name :{ $regex: re }},{  surname: { $regex: re } }]).exec(function(err, docs){
+      console.log(docs);
       res.json(docs);
     });//.exec(callback);
   }
