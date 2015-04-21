@@ -9,8 +9,7 @@ html(lang='es-AR')
       link(href='/components/foundation/css/foundation.css', rel='stylesheet')
       link(href='/css/style.css',rel='stylesheet')
       link(href='/components/select2/select2.css',rel='stylesheet')
-      //link(href='/components/select2/select2-bootstrap.css',rel='stylesheet')
-      //link(href='/css/select2-custom.css',rel='stylesheet')
+      link(href='/css/select2-custom.css',rel='stylesheet')
     block js
       script(src='/components/foundation/js/vendor/modernizr.js')
         if ENV_DEVELOPMENT
@@ -34,36 +33,77 @@ html(lang='es-AR')
   script(src='/components/foundation/js/foundation/foundation.js')
   script(src='/components/foundation/js/foundation/foundation.reveal.js')
   script(src='/components/select2/select2.min.js')
+
   script.
     $(document).foundation();
+  
   script.
-    $(document).ready(function(){
-    //$(".js-data-example-ajax").select2();
-    $(".js-data-example-ajax").select2({
-    ajax: {
+    //ACÁ SE LE DA EL ESTILO AL CONTENIDO QUE SE QUIERE MOSTRAR EN EL DESPLEGABLE
+    function repoFormatResult(repo) {
+      var markup = '<div class="row collapse">' +
+      '<div class=".small-2.columns">' +
+        '<img src="' + repo.owner.avatar_url + '" style="max-width: 10%" />' +
+      '</div>' +
+      '<div clas=".small-10.columns">' +
+        '<div class="row collapse">' +
+          '<div class=".small-6.columns">' + repo.full_name + '</div>' +
+          '<div class=".small-.columns">' + repo.forks_count + '</div>' +
+          '<div class=".small-2.columns">' + repo.stargazers_count + '</div>' +
+      '</div>';
+      //if (repo.description) {
+      //markup += '<div>' + repo.description + '</div>';
+      //}
+      markup += '</div></div>';
+      return markup;
+    }
+    
+    function repoFormatSelection(repo) {
+    return repo.full_name;
+    }
+  script#script_e6.
+    //ACÁ SE LE DAN LOS DATOS DE BUSQUEDA
+    $(document).ready(function() {
+    $("#e6").select2({
+    placeholder: "Search for a repository",
+    minimumInputLength: 1,
+    ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
     url: "https://api.github.com/search/repositories",
     dataType: 'json',
-    delay: 250,
-    data: function (params) {
+    quietMillis: 250,
+    data: function (term, page) {
     return {
-    q: params.term, // search term
-    page: params.page
+    q: term, // search term
     };
     },
-    processResults: function (data, page) {
-    // parse the results into the format expected by Select2.
-    // since we are using custom formatting functions we do not need to
-    // alter the remote JSON data
-    return {
-    results: data.items
-    };
+    results: function (data, page) { // parse the results into the format expected by Select2.
+    // since we are using custom formatting functions we do not need to alter the remote JSON data
+    return { results: data.items };
     },
     cache: true
     },
-    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-    minimumInputLength: 1,
-    templateResult: formatRepo, // omitted for brevity, see the source of this page
-    templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+    initSelection: function(element, callback) {
+    // the input tag has a value attribute preloaded that points to a preselected repository's id
+    // this function resolves that id attribute to an object that select2 can render
+    // using its formatResult renderer - that way the repository name is shown preselected
+    var id = $(element).val();
+    if (id !== "") {
+    $.ajax("https://api.github.com/repositories/" + id, {
+    dataType: "json"
+    }).done(function(data) { callback(data); });
+    }
+    },
+    formatResult: repoFormatResult, // omitted for brevity, see the source of this page
+    formatSelection: repoFormatSelection,  // omitted for brevity, see the source of this page
+    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
     });
-    
-    });    
+    });
+    //ÉSTO HACE QUE SE MUESTRE EL CONTENIDO SELECCIONADO DENTRO DE UN ELEMENTO DE LA PÁGINA
+    function log(e) {
+    var e=$("<li>"+e+"</li>");
+    $("#events_11").append(e);
+    e.animate({opacity:1}, 10000, 'linear', function() { e.animate({opacity:0}, 2000, 'linear', function() {e.remove(); }); });
+    }
+    //ACÁ SE DICE QUE CUANDO SE SELECCIONE EL ELEMENTO SE LLAME A LA FUNCIÓN log QUE ESTA ACA ARRIBA
+    $("#e6")
+    .on("select2-selecting", function(e) { log ("selecting val="+ e.val+" choice="+ JSON.stringify(e.choice));});
