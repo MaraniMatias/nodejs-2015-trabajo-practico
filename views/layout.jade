@@ -13,7 +13,7 @@ html(lang='es-AR')
     block js
       script(src='/components/foundation/js/vendor/modernizr.js')
         if ENV_DEVELOPMENT
-          script(src='http://localhost:35729/livereload.js')
+          script(src='http://localhost:3200/livereload.js')
   body
     block menuContenido
     -var year = new Date().getFullYear();
@@ -70,9 +70,9 @@ html(lang='es-AR')
     //ACÁ SE LE DAN LOS DATOS DE BUSQUEDA
     $(document).ready(function() {
     $("#e6").select2({
-    placeholder: "Search for a repository",
+    placeholder: "Name or Surname",
     minimumInputLength: 1,
-    ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+    ajax: { 
     //url: "https://api.github.com/search/repositories",
     url: "/search/res",
     dataType: 'json',
@@ -82,29 +82,26 @@ html(lang='es-AR')
     q: term, // search term
     };
     },
-    results: function (data, page) { // parse the results into the format expected by Select2.
-    // since we are using custom formatting functions we do not need to alter the remote JSON data
+    results: function (data, page) { 
     return { results: data };//data.items
     },
     cache: true
     },
     initSelection: function(element, callback) {
-    // the input tag has a value attribute preloaded that points to a preselected repository's id
-    // this function resolves that id attribute to an object that select2 can render
-    // using its formatResult renderer - that way the repository name is shown preselected
     var id = $(element).val();
     if (id !== "") {
-    $.ajax("https://api.github.com/repositories/" + id, {
+    $.ajax("/search/edit/" + id, {
     dataType: "json"
     }).done(function(data) { callback(data); });
     }
     },
-    formatResult: repoFormatResult, // omitted for brevity, see the source of this page
-    formatSelection: repoFormatSelection,  // omitted for brevity, see the source of this page
-    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+    formatResult: repoFormatResult, 
+    formatSelection: repoFormatSelection, 
+    dropdownCssClass: "bigdrop", 
+    escapeMarkup: function (m) { return m; }
     });
     });
+    
     //ÉSTO HACE QUE SE MUESTRE EL CONTENIDO SELECCIONADO DENTRO DE UN ELEMENTO DE LA PÁGINA
     function log(e) {
     var e=$("<li>"+e+"</li>");

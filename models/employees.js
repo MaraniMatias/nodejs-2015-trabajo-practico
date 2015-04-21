@@ -2,6 +2,8 @@ var hash ='sha256';//md5 sha512 sha256
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var patterns = require('./patterns.js')
+var config = require('../config.js');
+var urlPhoto = 'http://'+config.app.domain+':'+config.app.port + '/img/avatar_nodejs.png' ;
 var Schema = mongoose.Schema;
 var employeesSchema = new Schema({
     name : String,
@@ -10,7 +12,7 @@ var employeesSchema = new Schema({
     password : String,
     provider : {type : String, default: 'local' },
     provider_id : String ,
-    photo : String,
+    photo : {type: String, default: urlPhoto },
     createdAt : {type: Date, default: Date.now}
 });
 

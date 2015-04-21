@@ -76,8 +76,7 @@ app.get('/panel/employees/new', adminAuth, function(req, res){
 app.post('/panel/employees/new', adminAuth, function(req, res){
   var emp = new Employees({name: req.body.name, 
                            surname: req.body.surname,
-                           email: req.body.email, 
-                           photo: 'http://'+config.app.domain+':'+config.app.port + '/img/avatar_nodejs.png' ,
+                           email: req.body.email,
                            password: req.body.password , 
                            provider: 'web'});
   emp.save(function(err, doc){
