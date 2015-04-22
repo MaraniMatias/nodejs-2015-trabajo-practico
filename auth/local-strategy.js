@@ -34,7 +34,7 @@ passport.use('FacebookLogin', new FacebookStrategy( {
     callbackURL: '/admin/facebook/callback',
     profileFields : ['id', 'displayName', /*'provider', */'name' ,'photos']
   }, function(accessToken, refreshToken, profile, done) {
-	Employess.findOne({provider_id: profile.id /*,provider: profile.provider*/}, 
+	Employess.findOne({ provider_id: profile.id }, 
             function(err, user) {
               if(err) throw(err);
               if(!err && user!= null) return done(null, user);
@@ -61,6 +61,11 @@ passport.use('GithubLogin', new GitHubStrategy( {
     profileFields : ['id', 'displayName','name' ,'photos']
   },
     function(accessToken, refreshToken, profile, done) {
+  
+  Employess.findOne({ provider_id: profile.id }, 
+            function(err, user) {
+              if(err) throw(err);
+              if(!err && user!= null) return done(null, user);
       process.nextTick(function () {
         var user = new Employess({
                   provider_id	: profile.id,
@@ -75,5 +80,9 @@ passport.use('GithubLogin', new GitHubStrategy( {
               });
       
        });
+    });
+  
     }
 ));
+
+
