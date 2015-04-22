@@ -58,8 +58,11 @@ html(lang='es-AR')
         return  markup ;
       }
 
-      function FormatSelection(value) { 
-      return value.name +' '+ value.surname +' - '+value.email};
+      function FormatSelection(value) {
+        resul = value.name +' '+ value.surname ;
+        if(value.email){ resul =resul + ' - '+value.email};
+      return resul;
+      };
 
       $("#e6").select2({
       placeholder: "Search for a Employees",
@@ -73,9 +76,9 @@ html(lang='es-AR')
         cache: true ,
         data: function (term) { return { q: term }; },
         results: function (data) {
-                    data.items.forEach(function(element){
+                    data.forEach(function(element){
                     element.id=element._id; });
-                    return { results: data.items }; 
+                    return { results: data }; 
         }
       }
       });

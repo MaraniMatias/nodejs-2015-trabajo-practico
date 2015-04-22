@@ -20,10 +20,12 @@ block content
                 label(for='inputSearch') Search by name or sername.
             .row.collapse
               -if (user) {
-              .small-10.columns
+              .small-10.columns.select2-custom
+                input#e6(type='hidden', name='search',autofocus)
+              -}else{
+              .select2-custom
+                input#e6(type='hidden', name='search', autofocus)
               -}
-                .select2-custom
-                  input#e6(type='hidden', name='search')
               -if (user) {
               .small-2.columns
                 button.postfix(type='submit') Go
