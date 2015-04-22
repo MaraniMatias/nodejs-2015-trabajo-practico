@@ -13,8 +13,18 @@ block content
             p.text-info  #{msj}.
             -};
       .row
-        .small-6.large-centered.columns
+        form(name='fromSearch',action='',method='post',data-abide='')
+          .large-6.large-centered.medium-centered.columns
+            .row
+              .small-10.columns
+                label(for='inputSearch') Search by name or sername.
             .row.collapse
-              label(for='inputSearch') Search by name or sername.
-              .select2-custom
-                input#e6(type="hidden", name='Search')
+              -if (user) {
+              .small-10.columns
+              -}
+                .select2-custom
+                  input#e6(type='hidden', name='search')
+              -if (user) {
+              .small-2.columns
+                button.postfix(type='submit') Go
+              -}

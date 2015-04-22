@@ -65,15 +65,21 @@ app.get('/search/res', function(req, res,next){
                     element.password=undefined;
                     element.__v=undefined;
                     element.createdAt=undefined;
-                    
                     row++;
                    });
-       
       var myString = '{"total_count":'+row+',"incomplete_results": false, "items" :'+  JSON.stringify(docs) +'}';
-      
       res.json(JSON.parse(myString));
     });
   }
+});
+app.post('/search', function(req, res){
+   Employees.findOne({ _id: req.body.search }, function(err, doc){
+        if(!err){
+            res.render('edit', { title: 'Edit' , person: doc});
+        } else {
+            res.end(err);    
+        }    
+    });
 });
 
 // SAVE

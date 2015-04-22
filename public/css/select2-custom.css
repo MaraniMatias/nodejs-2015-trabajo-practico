@@ -3,17 +3,12 @@
     margin: 0;
 }
 
-.select2-custom {
-  margin-bottom:1rem;
-}
-
 .select2-container .select2-choice {
     display: block;
     height: 37px;
     padding: 0 0 0 8px;
     border: 1px solid #ccc;
     white-space: nowrap;
-    font-size: 0.875rem;
     line-height: 37px;
     color: #444;
     text-decoration: none;
@@ -29,10 +24,6 @@
 
 .select2-results .select2-result-label {
     padding: 5px 4px 5px;
-}
-
-.select2-results {
-  font-size: 0.875rem;
 }
 
 .select2-drop-active {
