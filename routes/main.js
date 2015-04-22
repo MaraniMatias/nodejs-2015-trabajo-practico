@@ -3,16 +3,10 @@ var Employees = require('../models/employees.js');
 var config = require('../config.js');
 var passport = module.parent.exports.passport;
 var adminAuth = function(req, res, next){
-  if(typeof req.user != "undefined"){
-      next();
-  }else{
-      res.redirect('/');
-  }
+  if(typeof req.user != "undefined"){ next();
+  }else{  res.redirect('/'); }
 };
-app.use(function(req, res, next) {
-    res.locals.user = req.user;
-    next();
-});
+app.use(function(req, res, next){res.locals.user = req.user; next(); });
 
 //LOGIN
 app.get('/admin', function(req, res){
@@ -43,8 +37,7 @@ app.get('/logout', function(req, res){
 app.get('/panel/employees', function(req, res){
   var msg = req.flash('message'); // Read the flash message
   Employees.find({}, function(err, docs){
-    res.render('list', { title: 'Welcome',  
-                        url: '/panel/employees' , 
+    res.render('list', { title: 'Welcome', url: '/panel/employees' , 
                         persons: docs, 
                         flashmsg: msg}); // Pass Flash Message to the view
   });
@@ -76,19 +69,12 @@ app.get('/search/res', function(req, res,next){
 });
 app.post('/search', function(req, res){
   res.redirect('/edit/'+req.body.search);
-  /*Employees.findOne({ _id: req.body.search }, function(err, doc){
-        if(!err){
-            res.render('edit', { title: 'Edit' , person: doc});
-        } else {
-            res.end(err);    
-        }    
-    });*/
 });
 
 // SAVE
 app.get('/panel/employees/new', adminAuth, function(req, res){
-    req.flash('message', 'You visited /new'); 
-    res.render('new', { title: 'New Employees', url: '/panel/employees/new' });
+    //req.flash('message', 'You visited /new'); 
+    res.render('new', { title: 'New Employees', url: '/panel/employees/new', person: new Employees() });
 });
 app.post('/panel/employees/new', adminAuth, function(req, res){
   var emp = new Employees({name: req.body.name, 
@@ -96,21 +82,22 @@ app.post('/panel/employees/new', adminAuth, function(req, res){
                            email: req.body.email,
                            password: req.body.password , 
                            provider: 'web'});
-  emp.save(function(err, doc){
-    if(!err){
+  emp.save(function(err, doc){ 
+    if(!err){ req.flash('message', 'Employee '+doc.name+' '+doc.surname +' added successfully.'); 
       res.redirect('/panel/employees');
-    }else{
-      res.redirect('/error');   
+    }else{ //en caso de error
+      if(err.code!=11000){console.log(err);var msg = err}else{var msg =  'This email is already used ciendo';};
+      res.render('new', { title: 'New Employees', url: '/panel/employees/new', person: emp , flashmsg: msg});
     }
   })
 });
 // REMOVE
 app.get('/delete/:id', adminAuth, function(req, res){
-   
-    Employees.remove({ _id: req.params.id }, function(err, doc){
-        if(!err){ res.redirect('/panel/employees');
-        } else { res.end(err);   }    
-    });
+  Employees.remove({ _id: req.params.id }, function(err, doc){
+    if(!err){ req.flash('message', 'Employee delete successfully.'); 
+      res.redirect('/panel/employees');
+    } else { res.end(err);   }    
+  });
   
 /*
   try {
@@ -127,24 +114,26 @@ finally {
 });
 // EDIT
 app.get('/edit/:id',adminAuth, function(req, res){
-    Employees.findOne({ _id: req.params.id }, function(err, doc){
-        if(!err){
-            res.render('edit', { title: 'Edit' , person: doc});
-        } else {
-            res.end(err);    
-        }    
-    });
+  Employees.findOne({ _id: req.params.id }, function(err, doc){
+    if(!err){ res.render('edit', { title: 'Edit' , person: doc});
+    } else { req.flash('message', 'Error '+err.message); 
+      res.end(err);    }    
+  });
 });
 app.post('/edit/:id',adminAuth, function(req, res){
   Employees.findOne({ _id: req.params.id }, function(err, doc){
-  if(!err){
-      doc.name = req.body.name; 
-      doc.surname = req.body.surname;
-      doc.email = req.body.email;
-      doc.save(function(err, doc){
-        if(!err){  res.redirect('/panel/employees');
-        } else {  res.end(err);  }    
-      }); 
-  } else { res.end(err);     }    
+    if(!err){
+      var emp = doc;
+        doc.name = req.body.name; 
+        doc.surname = req.body.surname;
+        doc.email = req.body.email;
+        doc.save(function(err, doc){
+          if(!err){ req.flash('message', 'Employee '+doc.name+' '+doc.surname +' edited successfully.'); 
+            res.redirect('/panel/employees');
+          } else { //req.flash('message', 'Error '+err.message); res.end(err);  }    
+            if(err.code!=11000){console.log(err);var msg = err}else{var msg =  'This email is already used ciendo';};       
+            res.render('edit', { title: 'Edit', person: emp , flashmsg: msg});
+        }}); 
+    } else { req.flash('message', 'Error '+err.message); res.end(err);}    
   });
 });

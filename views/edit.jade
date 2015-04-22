@@ -3,8 +3,13 @@ block content
   section.main-section
     .row
       h1.title= title
+    -if(flashmsg){
+    .row 
+      .large-12.columns
+        p.text-info  #{flashmsg}.
+    -};
     form(name='myForm',action='',method='post',data-abide='')
-      .row
+      .row.max-width-X
         .small-12.medium-6.large-6.columns
           label(for='name') Name: 
             small required

@@ -3,13 +3,11 @@ block content
   section.main-section
     .row
       h1.title= title
+    -if(flashmsg){
     .row 
       .large-12.columns
-        //p=JSON.stringify(persons)
-        -var msj = JSON.stringify(flashmsg);
-        -if(msj!='[]'){
-        p #{msj}
-        -};
+        p.text-info  #{flashmsg}.
+    -};
     .row.max-width-X
       .small-12.medium-12.large-12.columns
         form(name='formNew',action='',method='post',data-abide='')
@@ -17,18 +15,18 @@ block content
             .small-12.medium-6.large-6.columns
               label(for='name') Name: 
                 small required
-                input(type='text', name='name', id='name', placeholder='Name',  pattern='alpha',required)
+                input(type='text', name='name', id='name', placeholder='Name',  pattern='alpha',required, value=person.name)
               small.error Name is required and only letters are accepted.
             .small-12.medium-6.large-6.columns
               label(for='surname') Surname: 
                 small required
-                input(type='text', name='surname', id='surname', placeholder='Surname',pattern='alpha',required)
+                input(type='text', name='surname', id='surname', placeholder='Surname',pattern='alpha',required,value=person.surname)
               small.error Surname is required and only letters are accepted.
           .row
             .small-12.medium-6.large-6.columns
               label(for='email') Email: 
                 small required
-                input(type='email', name='email', id='email', placeholder='Email',pattern='email' ,required)
+                input(type='email', name='email', id='email', placeholder='Email',pattern='email' ,required,value=person.email)
               small.error Email is required and only email are accepted.
           .row
             .small-12.medium-6.large-6.columns
