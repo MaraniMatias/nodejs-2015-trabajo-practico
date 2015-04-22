@@ -10,12 +10,14 @@ app.use(function(req, res, next){res.locals.user = req.user; next(); });
 
 //LOGIN
 app.get('/admin', function(req, res){
-  var msg = req.flash('message');
-  res.render('admin', { title: 'Login', url: '/admin', flashmsg: msg});
+  res.render('admin', { title: 'Login', url: '/admin'});
+});
+app.get('/admin/fail', function(req, res){
+  res.render('admin', { title: 'Login', url: '/admin', flashmsg: 'Password or email invalid.'});
 });
 app.post('/admin', passport.authenticate('AdminLogin', 
     { successRedirect: '/panel/employees', 
-      failureRedirect: '/admin' })
+      failureRedirect: '/admin/fail'}) 
 );
 app.get('/logout', function(req, res){
     req.logout();
@@ -24,45 +26,38 @@ app.get('/logout', function(req, res){
   //FACEBOOK
   app.get('/admin/facebook', passport.authenticate('FacebookLogin'));
   app.get('/admin/facebook/callback', passport.authenticate('FacebookLogin',
-      { successRedirect: '/panel/employees',failureRedirect: '/admin' })
+      {successRedirect: '/panel/employees',failureRedirect: '/admin' })
   );
   //GITHUB
   app.get('/admin/github', passport.authenticate('GithubLogin'));
   app.get('/admin/github/callback', passport.authenticate('GithubLogin', 
-      {failureRedirect: '/admin' }) ,
-          function(req, res) { res.redirect('/panel/employees');}
+      {failureRedirect: '/admin'}),function(req, res){res.redirect('/panel/employees');}
   );
 
 // LISTADO
 app.get('/panel/employees', function(req, res){
-  var msg = req.flash('message'); // Read the flash message
+  var msg = req.flash('message');
   Employees.find({}, function(err, docs){
     res.render('list', { title: 'Welcome', url: '/panel/employees' , 
-                        persons: docs, 
-                        flashmsg: msg}); // Pass Flash Message to the view
+                        persons: docs, flashmsg: msg}); 
   });
 });
 // SEARCH
 app.get('/search', function(req, res){
-  var msg = req.flash('message');
   Employees.find({}, function(err, docs){
-    res.render('search', { title: 'Search', url: '/search', flashmsg: msg});
+    res.render('search', { title: 'Search', url: '/search'});
   });
 });
 app.get('/search/res', function(req, res,next){
   var re = new RegExp(req.query.q, 'i');
   if(req.query.q) {
 	Employees.find().or([{name :{ $regex: re }},{  surname: { $regex: re } }]).exec(function(err, docs){
-      //row = 0;
       docs.forEach(function(element, index, array){
                     element.password=undefined;
                     element.__v=undefined;
                     element.createdAt=undefined;
                     element.provider_id=undefined;
-                    //row++;
                    });
-      //var myString = '{"total_count":'+row+',"incomplete_results": false, "items" :'+  JSON.stringify(docs) +'}';
-      //res.json(JSON.parse(myString));
       res.json(docs);
     });
   }
@@ -73,7 +68,6 @@ app.post('/search', function(req, res){
 
 // SAVE
 app.get('/panel/employees/new', adminAuth, function(req, res){
-    //req.flash('message', 'You visited /new'); 
     res.render('new', { title: 'New Employees', url: '/panel/employees/new', person: new Employees() });
 });
 app.post('/panel/employees/new', adminAuth, function(req, res){
@@ -85,7 +79,7 @@ app.post('/panel/employees/new', adminAuth, function(req, res){
   emp.save(function(err, doc){ 
     if(!err){ req.flash('message', 'Employee '+doc.name+' '+doc.surname +' added successfully.'); 
       res.redirect('/panel/employees');
-    }else{ //en caso de error
+    }else{ 
       if(err.code!=11000){console.log(err);var msg = err}else{var msg =  'This email is already used ciendo';};
       res.render('new', { title: 'New Employees', url: '/panel/employees/new', person: emp , flashmsg: msg});
     }
@@ -98,19 +92,6 @@ app.get('/delete/:id', adminAuth, function(req, res){
       res.redirect('/panel/employees');
     } else { res.end(err);   }    
   });
-  
-/*
-  try {
-  throw "thrown message";
-}
-catch (e) {
-  console.log(e);
-  console.log("leaving catch block");
-}
-finally {
-  console.log("entering and leaving the finally block");
-}*/
-  
 });
 // EDIT
 app.get('/edit/:id',adminAuth, function(req, res){
@@ -130,7 +111,7 @@ app.post('/edit/:id',adminAuth, function(req, res){
         doc.save(function(err, doc){
           if(!err){ req.flash('message', 'Employee '+doc.name+' '+doc.surname +' edited successfully.'); 
             res.redirect('/panel/employees');
-          } else { //req.flash('message', 'Error '+err.message); res.end(err);  }    
+          } else { 
             if(err.code!=11000){console.log(err);var msg = err}else{var msg =  'This email is already used ciendo';};       
             res.render('edit', { title: 'Edit', person: emp , flashmsg: msg});
         }}); 

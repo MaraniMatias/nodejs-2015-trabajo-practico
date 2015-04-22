@@ -27,7 +27,6 @@ html(lang='es-AR')
             li
               a(href='mailto:maranimatias@gmail.com') Marani Matias Ezequiel.
   
-
     script(src='/components/foundation/js/vendor/jquery.js')
     script(src='/components/foundation/js/foundation/foundation.js')
     script(src='/components/foundation/js/foundation/foundation.abide.js')
@@ -37,50 +36,5 @@ html(lang='es-AR')
     script.
       $(document).foundation();
 -if('/search' == url ){
-    script.
-      function FormatResult(repo) {
-        if(!repo.surname){repo.surname='';};
-        if(!repo.name){repo.name='';};
-        if(!repo.email){repo.email='';};
-        if(!repo.photo){repo.photo='';};
-        var provedor='';
-        if(repo.provider=='local'){ provedor='<leabe>' + repo.provider + '</leabe>'; };
-        if(repo.provider=='web'){ provedor='<leabe class="text-info">' + repo.provider + '</leabe>'; };
-        if(repo.provider=='test'){ provedor='<leabe class="text-warning">' + repo.provider + '</leabe>'; };
-        if(repo.provider=='facebook'){ provedor='<leabe class="text-primary">' + repo.provider + '</leabe>'; };
-        if(repo.provider=='github'){ provedor='<leabe class="text-success">' + repo.provider + '</leabe>'; };
-        var markup = '<div class="row collapse"> <div class="small-2 columns">' +
-            '<img src="' + repo.photo + '" width="64px" height="64px" />' +
-            '</div> <div clas="small-10 columns"> <div class="row collapse">' +
-            '<div class="small-10 columns">' + repo.name +' '+ repo.surname +'</div>' +
-            '<div class="row collapse"> <div class="small-5 columns">' + repo.email + '</div>' +
-            '<div class="small-5 columns">'+ provedor +'</div> </div> </div> </div> </div>'; 
-        return  markup ;
-      }
-
-      function FormatSelection(value) {
-        resul = value.name +' '+ value.surname ;
-        if(value.email){ resul =resul + ' - '+value.email};
-      return resul;
-      };
-
-      $("#e6").select2({
-      placeholder: "Search for a Employees",
-      minimumInputLength: 1,
-      formatResult: FormatResult,
-      formatSelection: FormatSelection,
-      ajax: {
-        url: "/search/res",
-        dataType: 'json',
-        quietMillis: 250,
-        cache: true ,
-        data: function (term) { return { q: term }; },
-        results: function (data) {
-                    data.forEach(function(element){
-                    element.id=element._id; });
-                    return { results: data }; 
-        }
-      }
-      });
-
+    block script
 -};

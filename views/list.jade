@@ -6,9 +6,9 @@ block content
         .row
           h1.title= title
         .row.content
-          -var msj =JSON.stringify(flashmsg);
-          -if(msj!='[]'){
-          p.text-info  #{msj}.
+          //-var msj =JSON.stringify(flashmsg);
+          -if(flashmsg){
+          p.text-info  #{flashmsg}
           -};
     .row.max-width-X
       .large-12.columns.table-responsive
