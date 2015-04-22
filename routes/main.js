@@ -60,12 +60,17 @@ app.get('/search/res', function(req, res,next){
   var re = new RegExp(req.query.q, 'i');
   if(req.query.q) {
 	Employees.find().or([{name :{ $regex: re }},{  surname: { $regex: re } }]).exec(function(err, docs){
+      var row = 0;
       docs.forEach(function(element, index, array){
                     element.password=undefined;
                     element.__v=undefined;
                     element.createdAt=undefined;
+                    row++;
                    });
-      res.json(docs);
+       
+      var myString = '{"total_count":'+row+',"incomplete_results": false, "items" :'+  JSON.stringify(docs) +'}';
+      
+      res.json(JSON.parse(myString));
     });
   }
 });

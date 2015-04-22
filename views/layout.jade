@@ -38,88 +38,44 @@ html(lang='es-AR')
       $(document).foundation();
 -if('/search' == url ){
     script.
-      //ACÁ SE LE DA EL ESTILO AL CONTENIDO QUE SE QUIERE MOSTRAR EN EL DESPLEGABLE
       function repoFormatResult(repo) {
-      var provedor='';
-      if(!repo.surname){repo.surname='';};
-      if(!repo.name){repo.name='';};
-      if(!repo.email){repo.email='';};
-      if(!repo.photo){repo.photo='';};
-      if(repo.provider=='local'){
-      provedor='<leabe>' + repo.provider + '</leabe>';
-      };
-      if(repo.provider=='web'){
-      provedor='<leabe class="text-info">' + repo.provider + '</leabe>';
-      };
-      if(repo.provider=='test'){
-      provedor='<leabe class="text-warning">' + repo.provider + '</leabe>';
-      };
-      if(repo.provider=='facebook'){
-      provedor='<leabe class="text-primary">' + repo.provider + '</leabe>';
-      };
-      if(repo.provider=='github'){
-      provedor='<leabe class="text-success">' + repo.provider + '</leabe>';
-      };
-      var markup = 
-      '<div class="row collapse">' +
-        '<div class="small-2 columns">' +
-          '<img src="' + repo.photo + '" width="64px" height="64px" />' +
-        '</div>' +
-        '<div clas="small-10 columns">' +
-          '<div class="row collapse">' +
+       if(!repo.surname){repo.surname='';};
+        if(!repo.name){repo.name='';};
+        if(!repo.email){repo.email='';};
+        if(!repo.photo){repo.photo='';};
+        var provedor='';
+        if(repo.provider=='local'){ provedor='<leabe>' + repo.provider + '</leabe>'; };
+        if(repo.provider=='web'){ provedor='<leabe class="text-info">' + repo.provider + '</leabe>'; };
+        if(repo.provider=='test'){ provedor='<leabe class="text-warning">' + repo.provider + '</leabe>'; };
+        if(repo.provider=='facebook'){ provedor='<leabe class="text-primary">' + repo.provider + '</leabe>'; };
+        if(repo.provider=='github'){ provedor='<leabe class="text-success">' + repo.provider + '</leabe>'; };
+        var markup = '<div class="row collapse"> <div class="small-2 columns">' +
+            '<img src="' + repo.photo + '" width="64px" height="64px" />' +
+            '</div> <div clas="small-10 columns"> <div class="row collapse">' +
             '<div class="small-10 columns">' + repo.name +' '+ repo.surname +'</div>' +
-            //'<div class="small-4 columns">' + repo.surname + '</div>' +
-          '<div class="row collapse">' +
-            '<div class="small-5 columns">' + repo.email + '</div>' +
-            '<div class="small-5 columns">'+ provedor +'</div>' +
-          '</div>'+
-
-          '</div>'+
-        '</div>'+
-      '</div>'; 
-        return markup;
+            '<div class="row collapse"> <div class="small-5 columns">' + repo.email + '</div>' +
+            '<div class="small-5 columns">'+ provedor +'</div> </div> </div> </div> </div>'; 
+            
+        
+          return  repo.name +' '+ repo.surname ;
       }
 
-      function repoFormatSelection(repo) {
-      return repo._id;
-      }
-    script#script_e6.
-      //ACÁ SE LE DAN LOS DATOS DE BUSQUEDA
-      $(document).ready(function() {
+      function repoFormatSelection(value) { return value.id; }
+
       $("#e6").select2({
-      placeholder: "Name or Surname",
+      placeholder: "Search for a Employees",
       minimumInputLength: 1,
-      ajax: { 
-      //url: "https://api.github.com/search/repositories",
-      url: "/search/res",
-      dataType: 'json',
-      quietMillis: 250,
-      data: function (term, page) {
-      return {
-      q: term, // search term
-      };
+      ajax: {
+        url: "https://api.github.com/search/repositories",
+        //url: "/search/res",
+        dataType: 'json',
+        quietMillis: 250,
+        data: function (term) { return { q: term }; },
+        results: function (data) { return { results: data.items }; },
+        cache: true 
       },
-      results: function (data, page) { 
-      return { results: data };//data.items
-      },
-      cache: true
-      },
-      initSelection: function(element, callback) {
-      var id = $(element).val();
-      if (id !== "") {
-      $.ajax("/search/edit/" + id, {
-      dataType: "json"
-      }).done(function(data) { callback(data); });
-      }
-      },
-      formatResult: repoFormatResult, 
-      formatSelection: repoFormatSelection, 
-      dropdownCssClass: "bigdrop", 
-      escapeMarkup: function (m) { return m; }
-      });
+      formatResult: repoFormatResult,
+      formatSelection: repoFormatSelection
       });
 
-      //ACÁ SE DICE QUE CUANDO SE SELECCIONE EL ELEMENTO SE LLAME A LA FUNCIÓN log QUE ESTA ACA ARRIBA
-      $("#e6")
-      .on("select2-selecting", function(e) { log ("selecting val="+ e.val+" choice="+ JSON.stringify(e.choice));});
 -};

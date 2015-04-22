@@ -14,9 +14,7 @@ block content
             -};
       .row
         .small-6.large-centered.columns
-          form(action='/admin', method='post')
             .row.collapse
               label(for='inputSearch') Search by name or sername.
               .select2-custom
-                input#e6.bigdrop( name='Search' placeholder='Name or Surname', value='null')
-
+                input#e6(type="hidden", name='Search')
