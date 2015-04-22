@@ -65,6 +65,7 @@ app.get('/search/res', function(req, res,next){
                     element.password=undefined;
                     element.__v=undefined;
                     element.createdAt=undefined;
+                    
                     row++;
                    });
        

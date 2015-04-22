@@ -38,8 +38,8 @@ html(lang='es-AR')
       $(document).foundation();
 -if('/search' == url ){
     script.
-      function repoFormatResult(repo) {
-       if(!repo.surname){repo.surname='';};
+      function FormatResult(repo) {
+        if(!repo.surname){repo.surname='';};
         if(!repo.name){repo.name='';};
         if(!repo.email){repo.email='';};
         if(!repo.photo){repo.photo='';};
@@ -55,27 +55,29 @@ html(lang='es-AR')
             '<div class="small-10 columns">' + repo.name +' '+ repo.surname +'</div>' +
             '<div class="row collapse"> <div class="small-5 columns">' + repo.email + '</div>' +
             '<div class="small-5 columns">'+ provedor +'</div> </div> </div> </div> </div>'; 
-            
-        
-          return  repo.name +' '+ repo.surname ;
+        return  markup ;
       }
 
-      function repoFormatSelection(value) { return value.id; }
+      function FormatSelection(value) { 
+      return value.name +' '+ value.surname +' - '+value.email};
 
       $("#e6").select2({
       placeholder: "Search for a Employees",
       minimumInputLength: 1,
+      formatResult: FormatResult,
+      formatSelection: FormatSelection,
       ajax: {
-        url: "https://api.github.com/search/repositories",
-        //url: "/search/res",
+        url: "/search/res",
         dataType: 'json',
         quietMillis: 250,
+        cache: true ,
         data: function (term) { return { q: term }; },
-        results: function (data) { return { results: data.items }; },
-        cache: true 
-      },
-      formatResult: repoFormatResult,
-      formatSelection: repoFormatSelection
+        results: function (data) {
+                    data.items.forEach(function(element){
+                    element.id=element._id; });
+                    return { results: data.items }; 
+        }
+      }
       });
 
 -};
