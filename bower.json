@@ -7,6 +7,7 @@
     "components"
   ],
   "dependencies": {
-    "foundation": "~5.5.1"
+    "foundation": "~5.5.1",
+    "select2": "~3.5.2"
   }
 }
