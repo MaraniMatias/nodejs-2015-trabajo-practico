@@ -75,13 +75,14 @@ app.get('/search/res', function(req, res,next){
   }
 });
 app.post('/search', function(req, res){
-   Employees.findOne({ _id: req.body.search }, function(err, doc){
+  res.redirect('/edit/'+req.body.search);
+  /*Employees.findOne({ _id: req.body.search }, function(err, doc){
         if(!err){
             res.render('edit', { title: 'Edit' , person: doc});
         } else {
             res.end(err);    
         }    
-    });
+    });*/
 });
 
 // SAVE
