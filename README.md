@@ -1,5 +1,10 @@
-# Polo-Tecno-Curso-NodeJS-2015-TP-Final
+# nodejs 2015 trabajo practico final
 
-[![Coverage Status](https://coveralls.io/repos/MaraniMatias/Polo-Tecno-Curso-NodeJS-2015-TP-Final-Marani-Matias/badge.svg)](https://coveralls.io/r/MaraniMatias/Polo-Tecno-Curso-NodeJS-2015-TP-Final-Marani-Matias) [![Build Status](https://travis-ci.org/MaraniMatias/Polo-Tecno-Curso-NodeJS-2015-TP-Final-Marani-Matias.svg)](https://travis-ci.org/MaraniMatias/Polo-Tecno-Curso-NodeJS-2015-TP-Final-Marani-Matias)
+Este repositorio es para un curso de node.js , mongodb, express y framework relacionados.
+Este trabajo utiliza paquetes de npm:  express, express-session, 
+jade, stylus, mongoose, mongoose-fixtures, passport, passport-facebook, passport-github, passport-local.
+Paquetes para desarrolladores zombie, mocha, grunt.
+Paquetes de bower: foundation, select2.
 
-Este repositorio es para un curso de node.js , mongodb, express, jade, mocha, grunt que estoy cursando
+**Nota:** el archivo foundation.abide.js fue modificado agregando expreciones regulares que necesite
+ruta de archivo public/components/foundation/js/foundation/foundation.abide.js
